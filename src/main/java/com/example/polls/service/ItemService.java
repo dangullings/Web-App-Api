@@ -75,7 +75,7 @@ public class ItemService {
 		return itemRepository.findAllItemsByActive(pageable);
 	}
 
-	public ItemImage saveOrUpdateImage(MultipartFile file) {
+	public ItemImage saveOrUpdateImage(MultipartFile file, Long id) {
 		ItemImage item = new ItemImage();
 		item.setName(file.getOriginalFilename());
 		try {
@@ -84,6 +84,7 @@ public class ItemService {
 			e.printStackTrace();
 		}
 		
+		item.setId(id);
 		return itemImageRepository.save(item);
 	}
 }

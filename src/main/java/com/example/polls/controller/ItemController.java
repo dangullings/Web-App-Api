@@ -53,9 +53,9 @@ public class ItemController {
    		return new ResponseEntity<>(itemService.findImageById(id), HttpStatus.OK);
    	}
     
-    @PostMapping("/saveItemImage")
-	public ResponseEntity<ItemImage> save(@RequestParam("file") MultipartFile uploadFile) {
-		return new ResponseEntity<>(itemService.saveOrUpdateImage(uploadFile), HttpStatus.CREATED);
+    @PostMapping("/saveItemImage/{id}")
+	public ResponseEntity<ItemImage> save(@RequestParam("file") MultipartFile uploadFile, @PathVariable Long id) {
+		return new ResponseEntity<>(itemService.saveOrUpdateImage(uploadFile, id), HttpStatus.CREATED);
 	}
 
 	@PostMapping("/saveItem")
