@@ -77,6 +77,11 @@ public class TestStudentController {
 		test_studentService.deleteAllByTestId(testId);
 	}
 	
+	@DeleteMapping("/student/{studentId}")
+	public void deleteAllByStudentId(@PathVariable Long studentId) {
+		test_studentService.deleteAllByStudentId(studentId);
+	}
+	
 	@DeleteMapping("/test/{testId}/student/{studentId}")
 	public void deleteAllByTestIdAndStudentId(@PathVariable Long testId, @PathVariable Long studentId) {
 		test_studentService.deleteAllByTestIdAndStudentId(testId, studentId);

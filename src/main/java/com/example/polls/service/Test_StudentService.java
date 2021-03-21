@@ -46,6 +46,10 @@ public class Test_StudentService {
 		student_testRepository.deleteAllByTestId(testId);
 	}
 	
+	public void deleteAllByStudentId(Long studentId) {
+		student_testRepository.deleteAllByStudentId(studentId);
+	}
+	
 	public void deleteAllByTestIdAndStudentId(Long testId, Long studentId) {
 		student_testRepository.deleteAllByTestIdAndStudentId(testId, studentId);
 	}

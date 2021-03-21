@@ -44,6 +44,10 @@ public class AttendanceService {
 		return jsonObject.toString();
 	}
 
+	public void deleteAllByStudentId(Long studentId) {
+		attendanceRepo.deleteAllByStudentId(studentId);
+	}
+	
 	public Attendance findByClassDateIdAndStudentId(Long classDateId, Long studentId) {
 		System.out.println("findbytestidandstudentid service"+classDateId+" "+studentId);
 		return attendanceRepo.findByClassDateIdAndStudentId(classDateId, studentId);

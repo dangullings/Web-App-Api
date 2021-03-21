@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,7 +20,7 @@ import com.example.polls.repository.EventRepo;
 import com.example.polls.service.Student_Event_Service;
 
 @RestController
-@RequestMapping("/api/students")
+@RequestMapping("/api/studentevents")
 public class Student_Event_Controller {
 
 	@Autowired
@@ -45,6 +46,11 @@ public class Student_Event_Controller {
 	@PostMapping("/saveStudentEvent")
 	public ResponseEntity<CalendarEvent_Student> save(@RequestBody CalendarEvent_Student studentEvent) {
 		return new ResponseEntity<>(student_event_service.saveOrUpdate(studentEvent), HttpStatus.CREATED);
+	}
+	
+	@DeleteMapping("/student/{studentId}")
+	public void deleteAllByStudentId(@PathVariable Long studentId) {
+		student_event_service.deleteAllByStudentId(studentId);
 	}
 	
 }

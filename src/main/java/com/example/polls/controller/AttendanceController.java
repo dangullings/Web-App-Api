@@ -53,4 +53,9 @@ public class AttendanceController {
 	public ResponseEntity<String> deleteById(@PathVariable Long id) {
 		return new ResponseEntity<>(attendanceService.deleteById(id), HttpStatus.OK);
 	}
+	
+	@DeleteMapping("/student/{studentId}")
+	public void deleteAllByStudentId(@PathVariable Long studentId) {
+		attendanceService.deleteAllByStudentId(studentId);
+	}
 }

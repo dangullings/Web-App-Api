@@ -21,4 +21,8 @@ public class Student_Event_Service {
 	public CalendarEvent_Student saveOrUpdate(CalendarEvent_Student studentEvent) {
 		return student_event_repository.save(studentEvent);
 	}
+	
+	public void deleteAllByStudentId(Long studentId) {
+		student_event_repository.deleteAllByStudentId(studentId);
+	}
 }

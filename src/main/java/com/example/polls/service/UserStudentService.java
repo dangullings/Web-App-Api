@@ -15,4 +15,8 @@ public class UserStudentService {
 	public User_Student saveOrUpdate(User_Student userStudent) {
 		return userStudentRepo.save(userStudent);
 	}
+	
+	public void deleteAllByStudentId(Long studentId) {
+		userStudentRepo.deleteAllByStudentId(studentId);
+	}
 }

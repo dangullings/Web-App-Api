@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,7 +21,7 @@ import com.example.polls.repository.ClassSessionRepo;
 import com.example.polls.service.Student_Session_Service;
 
 @RestController
-@RequestMapping("/api/students")
+@RequestMapping("/api/studentsessions")
 public class Student_Session_Controller {
 
 	@Autowired
@@ -46,6 +47,11 @@ public class Student_Session_Controller {
 	@PostMapping("/saveStudentSession")
 	public ResponseEntity<Student_Session> save(@RequestBody Student_Session studentSession) {
 		return new ResponseEntity<>(student_session_service.saveOrUpdate(studentSession), HttpStatus.CREATED);
+	}
+	
+	@DeleteMapping("/student/{studentId}")
+	public void deleteAllByStudentId(@PathVariable Long studentId) {
+		student_session_service.deleteAllByStudentId(studentId);
 	}
 	
 }

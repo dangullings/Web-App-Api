@@ -22,4 +22,8 @@ public class Student_Session_Service {
 	public Student_Session saveOrUpdate(Student_Session studentSession) {
 		return student_session_repository.save(studentSession);
 	}
+	
+	public void deleteAllByStudentId(Long studentId) {
+		student_session_repository.deleteAllByStudentId(studentId);
+	}
 }
