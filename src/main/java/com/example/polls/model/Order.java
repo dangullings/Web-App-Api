@@ -18,70 +18,72 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 	
-	@ManyToOne
-	private Student student;
+	private long userId;
     
-    private String firstName;
-    private String lastName;
-    private LocalDate date;
-    private BigDecimal salePrice;
+    private String date;
+    private BigDecimal price;
     private String note;
-    private boolean isComplete;
+    private boolean isPaid;
+    private boolean isFulfilled;
 
     public Order(){
 
     }
 
-    public long getId() {
-        return id;
-    }
+	public long getId() {
+		return id;
+	}
 
-    public void setId(long id) {
-        this.id = id;
-    }
+	public void setId(long id) {
+		this.id = id;
+	}
 
-    public void setDate(java.sql.Date date){
-        this.date = date.toLocalDate();
-    }
+	public long getUserId() {
+		return userId;
+	}
 
-    public void setDate(LocalDate date){
-        this.date = date;
-    }
+	public void setUserId(long userId) {
+		this.userId = userId;
+	}
 
-    public LocalDate getDate() {
-        return date;
-    }
+	public String getDate() {
+		return date;
+	}
 
-    public String getFirstName() {
-        return firstName;
-    }
+	public void setDate(String date) {
+		this.date = date;
+	}
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
+	public BigDecimal getPrice() {
+		return price;
+	}
 
-    public String getLastName() {
-        return lastName;
-    }
+	public void setPrice(BigDecimal price) {
+		this.price = price;
+	}
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
+	public String getNote() {
+		return note;
+	}
 
-    public String getNote() { return note; }
+	public void setNote(String note) {
+		this.note = note;
+	}
 
-    public void setNote(String note) { this.note = note; }
+	public boolean isPaid() {
+		return isPaid;
+	}
 
-    public boolean isComplete() { return isComplete; }
+	public void setPaid(boolean isPaid) {
+		this.isPaid = isPaid;
+	}
 
-    public void setComplete(boolean complete) { isComplete = complete; }
+	public boolean isFulfilled() {
+		return isFulfilled;
+	}
 
-    public BigDecimal getSalePrice() {
-        return salePrice;
-    }
-
-    public void setSalePrice(BigDecimal salePrice) {
-        this.salePrice = salePrice;
-    }
+	public void setFulfilled(boolean isFulfilled) {
+		this.isFulfilled = isFulfilled;
+	}
 
 }

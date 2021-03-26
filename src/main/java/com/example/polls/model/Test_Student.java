@@ -18,8 +18,9 @@ public class Test_Student {
 	@Id
     private long studentId;
 
-    private String form, steps, power, kiap, questions, attitude, sparring, breaking;
-
+    private String ranks, form, steps, power, kiap, questions, attitude, sparring, breaking;
+    private boolean passed;
+    
     public Test_Student() {
 
     }
@@ -113,7 +114,24 @@ public class Test_Student {
         this.breaking = breaking;
     }
     
-    @PostLoad
+    
+    public String getRanks() {
+		return ranks;
+	}
+
+	public void setRanks(String ranks) {
+		this.ranks = ranks;
+	}
+
+	public boolean isPassed() {
+		return passed;
+	}
+
+	public void setPassed(boolean passed) {
+		this.passed = passed;
+	}
+
+	@PostLoad
     private void postLoadFunction(){
         System.out.println("id"+this.studentId+" testid"+this.testId+" form"+this.getForm());
     }

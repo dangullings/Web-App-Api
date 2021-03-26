@@ -17,13 +17,11 @@ public class LineItem {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 	
-	@OneToOne
-    private Order order;
+    private long orderId;
     
-	@OneToOne
-    private Item item;
+    private long itemId;
     
-    private String itemName;
+    private String color, size;
     private BigDecimal price;
     private int quantity;
 
@@ -31,60 +29,59 @@ public class LineItem {
 
     }
 
-    public Order getOrder() {
-		return order;
+	public long getId() {
+		return id;
 	}
 
-	public void setOrder(Order order) {
-		this.order = order;
+	public void setId(long id) {
+		this.id = id;
 	}
 
-	public Item getItem() {
-		return item;
+	public long getOrderId() {
+		return orderId;
 	}
 
-	public void setItem(Item item) {
-		this.item = item;
+	public void setOrderId(long orderId) {
+		this.orderId = orderId;
+	}
+
+	public long getItemId() {
+		return itemId;
+	}
+
+	public void setItemId(long itemId) {
+		this.itemId = itemId;
+	}
+
+	public String getColor() {
+		return color;
+	}
+
+	public void setColor(String color) {
+		this.color = color;
+	}
+
+	public String getSize() {
+		return size;
+	}
+
+	public void setSize(String size) {
+		this.size = size;
+	}
+
+	public BigDecimal getPrice() {
+		return price;
+	}
+
+	public void setPrice(BigDecimal price) {
+		this.price = price;
 	}
 
 	public int getQuantity() {
-        return quantity;
-    }
+		return quantity;
+	}
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-
-    public String getItemName() {
-        return itemName;
-    }
-
-    public void setItemName(String itemName) {
-        this.itemName = itemName;
-    }
-
-    public BigDecimal getPrice() {
-        return price;
-    }
-
-    public void setPrice(BigDecimal price) {
-        this.price = price;
-    }
-
-    public void setItemInfo(){
-        //ItemDAOImpl idi = new ItemDAOImpl();
-
-        //Item item = idi.selectById(getItemId());
-
-        //setItemName(item.getName());
-    }
-
-    public long getId() { return id; }
-
-    public void setId(long id) { this.id = id; }
-
-    public boolean isOrderComplete(){
-
-        return order.isComplete();
-    }
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
+	}
 }
