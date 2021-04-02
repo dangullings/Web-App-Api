@@ -1,4 +1,6 @@
 package com.example.polls.controller;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -13,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.polls.model.LineItem;
 import com.example.polls.model.Order;
+import com.example.polls.service.LineItemService;
 import com.example.polls.service.OrderService;
 
 @RestController
@@ -23,12 +27,21 @@ public class OrderController {
     @Autowired
 	private OrderService orderService;
 
-    @GetMapping
-	public ResponseEntity<Page<Order>> findAll(Pageable pageable) {
-		System.out.println("findAll controller"+pageable.getPageNumber()+" "+pageable.getPageSize());
-		return new ResponseEntity<>(orderService.findAll(pageable), HttpStatus.OK);
-	}
+    @Autowired
+	private LineItemService lineItemService;
+    
+	/*
+	 * @GetMapping public ResponseEntity<Page<Order>> findAll(Pageable pageable) {
+	 * System.out.println("findAll controller"+pageable.getPageNumber()+" "+pageable
+	 * .getPageSize()); return new ResponseEntity<>(orderService.findAll(pageable),
+	 * HttpStatus.OK); }
+	 */
 
+    @GetMapping
+	public ResponseEntity<Page<Order>> findAllOrderByDate(Pageable pageable) {
+		return new ResponseEntity<>(orderService.findAllOrderByDate(pageable), HttpStatus.OK);
+	}
+    
     @GetMapping("{id}")
 	public ResponseEntity<Order> findById(@PathVariable Long id) {
 		return new ResponseEntity<>(orderService.findById(id), HttpStatus.OK);
@@ -46,6 +59,12 @@ public class OrderController {
 
 	@DeleteMapping("{id}")
 	public ResponseEntity<String> deleteById(@PathVariable Long id) {
+		lineItemService.deleteByOrderId(id);
 		return new ResponseEntity<>(orderService.deleteById(id), HttpStatus.OK);
 	}
+	
+	@GetMapping("/{orderId}/lineItems")
+    public List<LineItem> findAllLineItemsById(@PathVariable(value = "orderId") long orderId) {
+        return lineItemService.findAllLineItemsById(orderId);
+    }
 }

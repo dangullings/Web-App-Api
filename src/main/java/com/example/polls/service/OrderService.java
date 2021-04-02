@@ -1,5 +1,7 @@
 package com.example.polls.service;
 
+import java.util.List;
+
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
 import org.slf4j.Logger;
@@ -9,7 +11,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import com.example.polls.model.LineItem;
 import com.example.polls.model.Order;
+import com.example.polls.model.Student;
+import com.example.polls.repository.LineItemRepo;
 import com.example.polls.repository.OrderRepo;
 
 @Service
@@ -18,6 +23,9 @@ public class OrderService {
     @Autowired
     private OrderRepo orderRepository;
     
+    @Autowired
+	private LineItemRepo lineItemRepo;
+    
     private static final Logger logger = LoggerFactory.getLogger(ItemService.class);
 
     
@@ -25,6 +33,10 @@ public class OrderService {
 		return orderRepository.findAll(pageable);
 	}
 
+	public Page<Order> findAllOrderByDate(Pageable pageable) {
+		return orderRepository.findAllOrderByDate(pageable);
+	}
+	
 	public Order findById(Long id) {
 		return orderRepository.findById(id).get();
 	}
@@ -43,5 +55,4 @@ public class OrderService {
 		}
 		return jsonObject.toString();
 	}
-	
 }

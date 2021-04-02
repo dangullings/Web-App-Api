@@ -1,5 +1,7 @@
 package com.example.polls.service;
 
+import java.util.List;
+
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
 import org.slf4j.Logger;
@@ -45,4 +47,11 @@ public class LineItemService {
 		return jsonObject.toString();
 	}
 	
+	public void deleteByOrderId(Long orderId) {
+		repo.deleteByOrderId(orderId);
+	}
+	
+	public List<LineItem> findAllLineItemsById(long orderId) {
+		return repo.findAllLineItemsByOrderId(orderId);
+	}
 }

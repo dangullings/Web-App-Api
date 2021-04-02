@@ -61,8 +61,6 @@ public class ClassSessionService {
 		List<Long> studentIds = studentSessionRepository.findAllBySessionId(sessionId);
 		List<Student> students = (List<Student>) studentRepository.findAllById(studentIds);
 		
-		System.out.println("findallstudentbyid service "+students.toString());
-		
 		return students;
 	}
 	

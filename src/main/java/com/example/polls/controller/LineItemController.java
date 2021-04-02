@@ -48,4 +48,9 @@ public class LineItemController {
 	public ResponseEntity<String> deleteById(@PathVariable Long id) {
 		return new ResponseEntity<>(service.deleteById(id), HttpStatus.OK);
 	}
+	
+	@DeleteMapping("/order/{orderId}")
+	public void deleteByOrderId(@PathVariable Long orderId) {
+		service.deleteByOrderId(orderId);
+	}
 }
