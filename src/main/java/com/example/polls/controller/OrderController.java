@@ -17,8 +17,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.polls.model.LineItem;
 import com.example.polls.model.Order;
+import com.example.polls.model.User;
 import com.example.polls.service.LineItemService;
 import com.example.polls.service.OrderService;
+import com.example.polls.service.UserService;
 
 @RestController
 @RequestMapping("/api/orders")
@@ -29,6 +31,9 @@ public class OrderController {
 
     @Autowired
 	private LineItemService lineItemService;
+    
+    @Autowired
+	private UserService userService;
     
 	/*
 	 * @GetMapping public ResponseEntity<Page<Order>> findAll(Pageable pageable) {
@@ -62,6 +67,11 @@ public class OrderController {
 		lineItemService.deleteByOrderId(id);
 		return new ResponseEntity<>(orderService.deleteById(id), HttpStatus.OK);
 	}
+	
+	@GetMapping("/{orderId}/users")
+    public List<User> findAllUsersByOrderId(@PathVariable(value = "orderId") long orderId) {
+        return orderService.findAllUserByOrderId(orderId);
+    }
 	
 	@GetMapping("/{orderId}/lineItems")
     public List<LineItem> findAllLineItemsById(@PathVariable(value = "orderId") long orderId) {

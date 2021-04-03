@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.polls.model.LineItem;
 import com.example.polls.model.Student;
 import com.example.polls.model.User;
 import com.example.polls.repository.StudentRepository;
@@ -37,4 +38,5 @@ public class UserService {
 	public User findById(Long id) {
 		return userRepo.findById(id).get();
 	}
+	
 }

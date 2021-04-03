@@ -11,11 +11,12 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import com.example.polls.model.LineItem;
 import com.example.polls.model.Order;
 import com.example.polls.model.Student;
+import com.example.polls.model.User;
 import com.example.polls.repository.LineItemRepo;
 import com.example.polls.repository.OrderRepo;
+import com.example.polls.repository.UserRepository;
 
 @Service
 public class OrderService {
@@ -25,6 +26,9 @@ public class OrderService {
     
     @Autowired
 	private LineItemRepo lineItemRepo;
+    
+    @Autowired
+	private UserRepository userRepo;
     
     private static final Logger logger = LoggerFactory.getLogger(ItemService.class);
 
@@ -54,5 +58,12 @@ public class OrderService {
 			e.printStackTrace();
 		}
 		return jsonObject.toString();
+	}
+	
+	public List<User> findAllUserByOrderId(long orderId) {
+		List<Long> userIds = orderRepository.findAllUsersByOrderId(orderId);
+		List<User> users = (List<User>) userRepo.findAllById(userIds);
+		
+		return users;
 	}
 }

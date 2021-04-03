@@ -1,6 +1,8 @@
 package com.example.polls.repository;
 
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
@@ -16,4 +18,9 @@ public interface OrderRepo extends PagingAndSortingRepository<Order, Long> {
     		value = "SELECT * FROM orders o ORDER BY o.date DESC",
     		nativeQuery = true)
     	Page<Order> findAllOrderByDate(Pageable pageable);
+	
+	@Query(
+    		value = "SELECT user_id FROM orders o WHERE o.id =:orderId",
+    		nativeQuery = true)
+    	List<Long> findAllUsersByOrderId(Long orderId);
 }

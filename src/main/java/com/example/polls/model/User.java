@@ -52,6 +52,12 @@ public class User extends DateAudit {
     private String email;
 
     @NotBlank
+    private String address;
+    
+    @NotBlank
+    private String phoneNumber;
+    
+    @NotBlank
     @Size(max = 100)
     private String password;
 
@@ -128,6 +134,22 @@ public class User extends DateAudit {
 
 	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
 	}
     
 }
