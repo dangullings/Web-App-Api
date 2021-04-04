@@ -29,11 +29,14 @@ public class ClassSessionService {
 
     private static final Logger logger = LoggerFactory.getLogger(TestService.class);
 	
-	public Page<ClassSession> findAll(Pageable pageable) {
-		System.out.println("findAll teststudent service"+pageable.getPageNumber()+" "+pageable.getPageSize());
-		return classSessionRepo.findAll(pageable);
-	}
+	//public Page<ClassSession> findAll(Pageable pageable) {
+	//	return classSessionRepo.findAll(pageable);
+	//}
 
+	public Page<ClassSession> findAllByEndDate(Pageable pageable) {
+		return classSessionRepo.findAllByEndDate(pageable);
+	}
+	
 	public ClassSession findById(Long id) {
 		return classSessionRepo.findById(id).get();
 	}

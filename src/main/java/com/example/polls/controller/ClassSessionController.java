@@ -29,12 +29,16 @@ public class ClassSessionController {
     @Autowired
 	private ClassSessionService classSessionService;
 
-    @GetMapping
-	public ResponseEntity<Page<ClassSession>> findAll(Pageable pageable) {
-		System.out.println("findAll teststudent controllers"+pageable.getPageNumber()+" "+pageable.getPageSize());
-		return new ResponseEntity<>(classSessionService.findAll(pageable), HttpStatus.OK);
-	}
+    //@GetMapping
+	//public ResponseEntity<Page<ClassSession>> findAll(Pageable pageable) {
+	//	return new ResponseEntity<>(classSessionService.findAll(pageable), HttpStatus.OK);
+	//}
 
+    @GetMapping
+	public ResponseEntity<Page<ClassSession>> findAllByEndDate(Pageable pageable) {
+		return new ResponseEntity<>(classSessionService.findAllByEndDate(pageable), HttpStatus.OK);
+	}
+    
 	@GetMapping("{id}")
 	public ResponseEntity<ClassSession> findById(@PathVariable Long id) {
 		System.out.println("findbyid "+id);

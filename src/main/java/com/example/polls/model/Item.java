@@ -22,7 +22,7 @@ import javax.persistence.Table;
   private boolean active;
   private String sizes;
   private String colors;
-  private String gender;
+  private String genders;
   
   private int imageId;
   
@@ -102,12 +102,12 @@ public void setColors(String colors) {
 	this.colors = colors;
 }
 
-public String getGender() {
-	return gender;
+public String getGenders() {
+	return genders;
 }
 
-public void setGender(String gender) {
-	this.gender = gender;
+public void setGenders(String genders) {
+	this.genders = genders;
 }
 
 @PostLoad
