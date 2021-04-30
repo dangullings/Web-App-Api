@@ -1,5 +1,7 @@
 package com.example.polls.model;
 
+import java.math.BigDecimal;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
@@ -16,7 +18,11 @@ public class CalendarEvent_Student {
 	@Id
     private long studentId;
 	
-	private boolean isAttending;
+	private BigDecimal paid;
+	
+	private BigDecimal charged;
+	
+	private String signupDate;
 
 	public CalendarEvent_Student() {
 		super();
@@ -38,12 +44,28 @@ public class CalendarEvent_Student {
 		this.studentId = studentId;
 	}
 
-	public boolean isAttending() {
-		return isAttending;
+	public BigDecimal getPaid() {
+		return paid;
 	}
 
-	public void setAttending(boolean isAttending) {
-		this.isAttending = isAttending;
+	public void setPaid(BigDecimal paid) {
+		this.paid = paid;
+	}
+
+	public BigDecimal getCharged() {
+		return charged;
+	}
+
+	public void setCharged(BigDecimal charged) {
+		this.charged = charged;
+	}
+
+	public String getSignupDate() {
+		return signupDate;
+	}
+
+	public void setSignupDate(String signupDate) {
+		this.signupDate = signupDate;
 	}
 	
 	

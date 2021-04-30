@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.polls.model.LineItem;
 import com.example.polls.model.Order;
+import com.example.polls.model.Student;
 import com.example.polls.model.User;
 import com.example.polls.service.LineItemService;
 import com.example.polls.service.OrderService;
@@ -42,6 +43,17 @@ public class OrderController {
 	 * HttpStatus.OK); }
 	 */
 
+    @GetMapping("/search/{searchText}/fulfilled/{fulfilled}")
+	public ResponseEntity<Page<Order>> findAll(Pageable pageable, @PathVariable String searchText, @PathVariable boolean fulfilled) {
+		System.out.println("findAll controller search"+searchText+" boolean active "+fulfilled);
+		return new ResponseEntity<>(orderService.findAll(pageable, searchText, fulfilled), HttpStatus.OK);
+	}
+    
+    @GetMapping("/fulfilled/{fulfilled}")
+	public ResponseEntity<Page<Order>> findAllByFulfilled(Pageable pageable, @PathVariable boolean fulfilled) {
+		return new ResponseEntity<>(orderService.findAllByFulfilled(pageable, fulfilled), HttpStatus.OK);
+	}
+    
     @GetMapping
 	public ResponseEntity<Page<Order>> findAllOrderByDate(Pageable pageable) {
 		return new ResponseEntity<>(orderService.findAllOrderByDate(pageable), HttpStatus.OK);

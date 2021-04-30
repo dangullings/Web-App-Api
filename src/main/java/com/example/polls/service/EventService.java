@@ -9,16 +9,21 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import com.example.polls.model.ClassDate;
-import com.example.polls.model.ClassSession;
 import com.example.polls.model.CalendarEvent;
+import com.example.polls.model.Student;
 import com.example.polls.repository.EventRepo;
+import com.example.polls.repository.StudentRepository;
+import com.example.polls.repository.Student_Event_Repository;
 
 @Service
 public class EventService {
 
 	@Autowired
     private EventRepo eventRepo;
+	@Autowired
+    private Student_Event_Repository studentEventRepository;
+	@Autowired
+    private StudentRepository studentRepository;
 	
 	public Page<CalendarEvent> findAllByMonthYear(Pageable pageable, String month, String year) {
 		return eventRepo.findAllByMonthYear(pageable, month, year);
@@ -49,5 +54,12 @@ public class EventService {
 			e.printStackTrace();
 		}
 		return jsonObject.toString();
+	}
+	
+	public List<Student> findAllStudentsById(long eventId) {
+		List<Long> studentIds = studentEventRepository.findAllByCalendarEventId(eventId);
+		List<Student> students = (List<Student>) studentRepository.findAllById(studentIds);
+		
+		return students;
 	}
 }

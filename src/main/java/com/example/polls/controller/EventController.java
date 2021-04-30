@@ -36,6 +36,7 @@ public class EventController {
 	
 	@GetMapping
 	public ResponseEntity<Page<CalendarEvent>> findAll(Pageable pageable) {
+		System.out.println("get all events ");
 		return new ResponseEntity<>(eventService.findAll(pageable), HttpStatus.OK);
 	}
 
@@ -63,5 +64,12 @@ public class EventController {
 	public ResponseEntity<String> deleteById(@PathVariable Long id) {
 		return new ResponseEntity<>(eventService.deleteById(id), HttpStatus.OK);
 	}
+	
+	@GetMapping("/{eventId}/students")
+    public List<Student> findAllStudentsById(@PathVariable(value = "eventId") long eventId) {
+		System.out.println("findallstudentbyid controller "+eventId);
+		
+        return eventService.findAllStudentsById(eventId);
+    }
 }
 

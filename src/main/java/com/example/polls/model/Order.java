@@ -78,11 +78,11 @@ public class Order {
 		this.isPaid = isPaid;
 	}
 
-	public boolean isFulfilled() {
+	public boolean getIsFulfilled() {
 		return isFulfilled;
 	}
 
-	public void setFulfilled(boolean isFulfilled) {
+	public void setIsFulfilled(boolean isFulfilled) {
 		this.isFulfilled = isFulfilled;
 	}
 

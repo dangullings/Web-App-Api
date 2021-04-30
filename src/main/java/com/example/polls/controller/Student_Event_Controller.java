@@ -16,7 +16,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.polls.model.CalendarEvent;
 import com.example.polls.model.CalendarEvent_Student;
+import com.example.polls.model.Student;
+import com.example.polls.model.Test_Student;
 import com.example.polls.repository.EventRepo;
+import com.example.polls.repository.StudentRepository;
 import com.example.polls.service.Student_Event_Service;
 
 @RestController
@@ -27,6 +30,13 @@ public class Student_Event_Controller {
 	private Student_Event_Service student_event_service;
 	@Autowired
 	private EventRepo event_repo;
+	@Autowired
+	private StudentRepository student_repo;
+	
+	@GetMapping("/event/{eventId}")
+	public List<CalendarEvent_Student> findAllByEventId(@PathVariable Long eventId) {
+		return student_event_service.findAllByEventId(eventId);
+	}
 	
 	@GetMapping("/{studentId}/events")
     public List<CalendarEvent> findAllByStudentId(@PathVariable(value = "studentId") long studentId) {
@@ -43,6 +53,13 @@ public class Student_Event_Controller {
 		return null;
     }
 	
+	@GetMapping("/{eventId}/students")
+    public List<Student> findAllByEventId(@PathVariable(value = "eventId") long eventId) {
+        List<Long> studentIds =  student_event_service.findAllByEventId(eventId);
+        
+        return (List<Student>) student_repo.findAllById(studentIds);
+    }
+	
 	@PostMapping("/saveStudentEvent")
 	public ResponseEntity<CalendarEvent_Student> save(@RequestBody CalendarEvent_Student studentEvent) {
 		return new ResponseEntity<>(student_event_service.saveOrUpdate(studentEvent), HttpStatus.CREATED);
@@ -51,6 +68,11 @@ public class Student_Event_Controller {
 	@DeleteMapping("/student/{studentId}")
 	public void deleteAllByStudentId(@PathVariable Long studentId) {
 		student_event_service.deleteAllByStudentId(studentId);
+	}
+	
+	@DeleteMapping("/event/{eventId}/student/{studentId}")
+	public void deleteAllByEventIdAndStudentId(@PathVariable Long eventId, @PathVariable Long studentId) {
+		student_event_service.deleteAllByEventIdAndStudentId(eventId, studentId);
 	}
 	
 }

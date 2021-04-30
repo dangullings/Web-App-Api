@@ -32,6 +32,13 @@ public class OrderService {
     
     private static final Logger logger = LoggerFactory.getLogger(ItemService.class);
 
+    public Page<Order> findAll(Pageable pageable, String searchText, boolean fulfilled) {
+		return orderRepository.findAll(pageable, searchText, fulfilled);
+	}
+    
+    public Page<Order> findAllByFulfilled(Pageable pageable, boolean fulfilled) {
+		return orderRepository.findAllByFulfilled(pageable, fulfilled);
+	}
     
 	public Page<Order> findAll(Pageable pageable) {
 		return orderRepository.findAll(pageable);
