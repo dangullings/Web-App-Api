@@ -14,10 +14,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.polls.model.CalendarEvent_Student;
 import com.example.polls.model.ClassSession;
 import com.example.polls.model.Student;
 import com.example.polls.model.Student_Session;
 import com.example.polls.repository.ClassSessionRepo;
+import com.example.polls.repository.StudentRepository;
 import com.example.polls.service.Student_Session_Service;
 
 @RestController
@@ -28,6 +30,13 @@ public class Student_Session_Controller {
 	private Student_Session_Service student_session_service;
 	@Autowired
 	private ClassSessionRepo session_repo;
+	@Autowired
+	private StudentRepository student_repo;
+	
+	@GetMapping("/session/{sessionId}")
+	public List<Student_Session> findAllSessionsBySessionId(@PathVariable Long sessionId) {
+		return student_session_service.findAllSessionsBySessionId(sessionId);
+	}
 	
 	@GetMapping("/{studentId}/sessions")
     public List<ClassSession> findAllByStudentId(@PathVariable(value = "studentId") long studentId) {
@@ -42,6 +51,13 @@ public class Student_Session_Controller {
         }
         
 		return null;
+    }
+	
+	@GetMapping("/{sessionId}/students")
+    public List<Student> findAllBySessionId(@PathVariable(value = "sessionId") long sessionId) {
+        List<Long> studentIds =  student_session_service.findAllBySessionId(sessionId);
+        
+        return (List<Student>) student_repo.findAllById(studentIds);
     }
 	
 	@PostMapping("/saveStudentSession")

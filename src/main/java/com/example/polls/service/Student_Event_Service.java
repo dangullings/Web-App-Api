@@ -24,12 +24,15 @@ public class Student_Event_Service {
 	}
 	
 	public List<CalendarEvent_Student> findAllByEventId(Long eventId) {
-		System.out.println("findbyeventidandstudentid service"+eventId);
 		return student_event_repository.findAllByEventId(eventId);
 	}
 	
 	public CalendarEvent_Student saveOrUpdate(CalendarEvent_Student studentEvent) {
 		return student_event_repository.save(studentEvent);
+	}
+	
+	public void deleteAllByEventId(Long eventId) {
+		student_event_repository.deleteAllByEventId(eventId);
 	}
 	
 	public void deleteAllByStudentId(Long studentId) {

@@ -1,5 +1,7 @@
 package com.example.polls.model;
 
+import java.math.BigDecimal;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
@@ -14,6 +16,12 @@ public class Student_Session {
 	
 	@Id
     private long studentId;
+	
+	private BigDecimal paid;
+	
+	private BigDecimal charged;
+	
+	private String signupDate;
 
 	public Student_Session() {
 		super();
@@ -35,5 +43,28 @@ public class Student_Session {
 		this.studentId = studentId;
 	}
 
+	public BigDecimal getPaid() {
+		return paid;
+	}
+
+	public void setPaid(BigDecimal paid) {
+		this.paid = paid;
+	}
+
+	public BigDecimal getCharged() {
+		return charged;
+	}
+
+	public void setCharged(BigDecimal charged) {
+		this.charged = charged;
+	}
+
+	public String getSignupDate() {
+		return signupDate;
+	}
+
+	public void setSignupDate(String signupDate) {
+		this.signupDate = signupDate;
+	}
 
 }

@@ -33,9 +33,16 @@ public interface Student_Event_Repository extends PagingAndSortingRepository<Cal
 		@Modifying
 	    @Transactional
 		@Query(
-				value = "DELETE FROM calendar_events_students ces WHERE ces.event_id = :eventId AND ces.student_id = :studentId",
+				value = "DELETE FROM calendar_events_students ces WHERE ces.calendar_event_id = :eventId AND ces.student_id = :studentId",
 				nativeQuery = true)
 			void deleteAllByEventIdAndStudentId(@Param("eventId") Long eventId, @Param("studentId") Long studentId);
+		
+		@Modifying
+	    @Transactional
+		@Query(
+				value = "DELETE FROM calendar_events_students ces WHERE ces.calendar_event_id = :eventId",
+				nativeQuery = true)
+			void deleteAllByEventId(@Param("eventId") Long eventId);
 		
 		@Modifying
 	    @Transactional

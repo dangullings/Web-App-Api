@@ -65,6 +65,11 @@ public class Student_Event_Controller {
 		return new ResponseEntity<>(student_event_service.saveOrUpdate(studentEvent), HttpStatus.CREATED);
 	}
 	
+	@DeleteMapping("/event/{eventId}")
+	public void deleteAllByEventId(@PathVariable Long eventId) {
+		student_event_service.deleteAllByEventId(eventId);
+	}
+	
 	@DeleteMapping("/student/{studentId}")
 	public void deleteAllByStudentId(@PathVariable Long studentId) {
 		student_event_service.deleteAllByStudentId(studentId);
