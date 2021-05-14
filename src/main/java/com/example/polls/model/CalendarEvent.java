@@ -27,6 +27,14 @@ public class CalendarEvent {
     String rankRange;
     BigDecimal price;
     
+    private int imageId;
+    
+	public int getImageId() {
+		return imageId;
+	}
+	public void setImageId(int imageId) {
+		this.imageId = imageId;
+	}
 	public long getId() {
 		return id;
 	}

@@ -30,6 +30,15 @@ public class ClassSession {
     String description;
     String days;
     BigDecimal price;
+    
+private int imageId;
+    
+	public int getImageId() {
+		return imageId;
+	}
+	public void setImageId(int imageId) {
+		this.imageId = imageId;
+	}
 
     public ClassSession(){
 

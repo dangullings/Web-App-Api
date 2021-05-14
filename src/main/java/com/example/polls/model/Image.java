@@ -11,8 +11,8 @@ import javax.persistence.Lob;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "itemImages")
-public class ItemImage {
+@Table(name = "images")
+public class Image {
 
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,11 +22,11 @@ public class ItemImage {
     @Lob
     private byte[] photo;
 
-    public ItemImage(){
+    public Image(){
 
     }
 
-    public ItemImage(String name, byte[] photo){
+    public Image(String name, byte[] photo){
         this.name = name;
         this.photo = photo;
     }

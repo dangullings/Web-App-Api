@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.example.polls.model.Image;
 import com.example.polls.model.Item;
-import com.example.polls.model.ItemImage;
 import com.example.polls.service.ItemService;
 
 @RestController
@@ -49,12 +49,12 @@ public class ItemController {
 	}
     
     @GetMapping("/image/{id}")
-   	public ResponseEntity<ItemImage> findImageById(@PathVariable Long id) {
+   	public ResponseEntity<Image> findImageById(@PathVariable Long id) {
    		return new ResponseEntity<>(itemService.findImageById(id), HttpStatus.OK);
    	}
     
     @PostMapping("/saveItemImage/{id}")
-	public ResponseEntity<ItemImage> save(@RequestParam("file") MultipartFile uploadFile, @PathVariable Long id) {
+	public ResponseEntity<Image> save(@RequestParam("file") MultipartFile uploadFile, @PathVariable Long id) {
 		return new ResponseEntity<>(itemService.saveOrUpdateImage(uploadFile, id), HttpStatus.CREATED);
 	}
 

@@ -12,9 +12,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.example.polls.model.Image;
 import com.example.polls.model.Item;
-import com.example.polls.model.ItemImage;
-import com.example.polls.repository.ItemImageRepo;
+import com.example.polls.repository.ImageRepo;
 import com.example.polls.repository.ItemRepository;
 
 @Service
@@ -23,7 +23,7 @@ public class ItemService {
     @Autowired
     private ItemRepository itemRepository;
     @Autowired
-    private ItemImageRepo itemImageRepository;
+    private ImageRepo imageRepository;
     
     private static final Logger logger = LoggerFactory.getLogger(ItemService.class);
 
@@ -40,8 +40,8 @@ public class ItemService {
 		return itemRepository.findById(id).get();
 	}
 
-	public ItemImage findImageById(Long id) {
-		return itemImageRepository.findById(id).get();
+	public Image findImageById(Long id) {
+		return imageRepository.findById(id).get();
 	}
 	
 	public Item saveOrUpdate(Item student) {
@@ -62,7 +62,7 @@ public class ItemService {
 	public String deleteItemImageById(Long id) {
 		JSONObject jsonObject = new JSONObject();
 		try {
-			itemImageRepository.deleteById(id);
+			imageRepository.deleteById(id);
 			jsonObject.put("message", "Image deleted successfully");
 		} catch (JSONException e) {
 			e.printStackTrace();
@@ -75,8 +75,8 @@ public class ItemService {
 		return itemRepository.findAllItemsByActive(pageable);
 	}
 
-	public ItemImage saveOrUpdateImage(MultipartFile file, Long id) {
-		ItemImage item = new ItemImage();
+	public Image saveOrUpdateImage(MultipartFile file, Long id) {
+		Image item = new Image();
 		item.setName(file.getOriginalFilename());
 		try {
 			item.setPhoto(file.getBytes());
@@ -85,6 +85,6 @@ public class ItemService {
 		}
 		
 		item.setId(id);
-		return itemImageRepository.save(item);
+		return imageRepository.save(item);
 	}
 }
