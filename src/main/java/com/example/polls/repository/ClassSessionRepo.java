@@ -10,6 +10,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import com.example.polls.model.CalendarEvent;
 import com.example.polls.model.ClassDate;
 import com.example.polls.model.ClassSession;
 
@@ -20,7 +21,12 @@ public interface ClassSessionRepo extends JpaRepository<ClassSession, Long> {
     @Query(
     		value = "SELECT * FROM class_sessions cs ORDER BY cs.start_date DESC LIMIT 10",
     		nativeQuery = true)
-    	List<ClassSession> findAllByDate();
+    	List<ClassSession> findAllByDateDesc();
+    
+    @Query(
+    		value = "SELECT * FROM class_sessions cs ORDER BY cs.start_date Asc LIMIT 10",
+    		nativeQuery = true)
+    	List<ClassSession> findAllByDateAsc();
     
     @Query(
     		value = "SELECT * FROM class_sessions cs ORDER BY cs.end_date DESC",

@@ -41,8 +41,12 @@ public class EventService {
 		return eventRepo.save(event);
 	}
 
-	public List<CalendarEvent> findAllByDate() {
-		return eventRepo.findAllByDate();
+	public List<CalendarEvent> findAllByDateDesc() {
+		return eventRepo.findAllByDateDesc();
+	}
+	
+	public List<CalendarEvent> findAllByDateAsc() {
+		return eventRepo.findAllByDateAsc();
 	}
 	
 	public String deleteById(Long id) {

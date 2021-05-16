@@ -22,7 +22,12 @@ public interface EventRepo extends JpaRepository<CalendarEvent, Long> {
     	Page<CalendarEvent> findAllByMonthYear(Pageable pageable, String month, String year);
 	
 	@Query(
-    		value = "SELECT * FROM calendar_events e ORDER BY e.date DESC LIMIT 10",
+    		value = "SELECT * FROM calendar_events e ORDER BY e.date Asc LIMIT 10",
     		nativeQuery = true)
-    	List<CalendarEvent> findAllByDate();
+    	List<CalendarEvent> findAllByDateAsc();
+	
+	@Query(
+    		value = "SELECT * FROM calendar_events e ORDER BY e.date Desc LIMIT 10",
+    		nativeQuery = true)
+    	List<CalendarEvent> findAllByDateDesc();
 }

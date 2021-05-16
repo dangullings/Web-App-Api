@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.polls.model.CalendarEvent;
 import com.example.polls.model.ClassSession;
 import com.example.polls.model.Student;
 import com.example.polls.model.Student_Session;
@@ -61,8 +62,13 @@ public class ClassSessionController {
 	}
 	
 	@GetMapping("/date")
-    public List<ClassSession> findAllByDate() {
-        return classSessionService.findAllByDate();
+    public List<ClassSession> findAllByDateDesc() {
+        return classSessionService.findAllByDateDesc();
+    }
+	
+	@GetMapping("/date/asc")
+    public List<ClassSession> findAllByDateAsc() {
+        return classSessionService.findAllByDateAsc();
     }
 	
 	@GetMapping("/{sessionId}/students")

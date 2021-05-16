@@ -46,8 +46,13 @@ public class EventController {
 	}
 
 	@GetMapping("/date")
-    public List<CalendarEvent> findAllByDate() {
-        return eventService.findAllByDate();
+    public List<CalendarEvent> findAllByDateDesc() {
+        return eventService.findAllByDateDesc();
+    }
+	
+	@GetMapping("/date/asc")
+    public List<CalendarEvent> findAllByDateAsc() {
+        return eventService.findAllByDateAsc();
     }
 	
 	@PostMapping("/saveEvent")

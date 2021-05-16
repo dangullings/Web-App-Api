@@ -11,6 +11,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import com.example.polls.model.CalendarEvent;
 import com.example.polls.model.ClassSession;
 import com.example.polls.model.Student;
 import com.example.polls.repository.ClassSessionRepo;
@@ -56,8 +57,12 @@ public class ClassSessionService {
 		return jsonObject.toString();
 	}
 
-	public List<ClassSession> findAllByDate() {
-		return classSessionRepo.findAllByDate();
+	public List<ClassSession> findAllByDateDesc() {
+		return classSessionRepo.findAllByDateDesc();
+	}
+	
+	public List<ClassSession> findAllByDateAsc() {
+		return classSessionRepo.findAllByDateAsc();
 	}
 	
 	public List<Student> findAllStudentsById(long sessionId) {
