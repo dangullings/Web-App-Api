@@ -22,13 +22,17 @@ public class UserStudentController {
 	
 	@PostMapping("/saveUserStudent")
 	public ResponseEntity<User_Student> save(@RequestBody User_Student userStudent) {
-		System.out.println("userstudent save"+userStudent.toString());
 		return new ResponseEntity<>(userStudentService.saveOrUpdate(userStudent), HttpStatus.CREATED);
 	}
 	
 	@DeleteMapping("/student/{studentId}")
 	public void deleteAllByStudentId(@PathVariable Long studentId) {
 		userStudentService.deleteAllByStudentId(studentId);
+	}
+	
+	@DeleteMapping("/user/{userId}/student/{studentId}")
+	public void deleteAllByUserIdAndStudentId(@PathVariable Long userId, @PathVariable Long studentId) {
+		userStudentService.deleteAllByUserIdAndStudentId(userId, studentId);
 	}
 	
 }

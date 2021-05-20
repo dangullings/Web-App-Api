@@ -19,4 +19,8 @@ public class UserStudentService {
 	public void deleteAllByStudentId(Long studentId) {
 		userStudentRepo.deleteAllByStudentId(studentId);
 	}
+	
+	public void deleteAllByUserIdAndStudentId(Long userId, Long studentId) {
+		userStudentRepo.deleteAllByUserIdAndStudentId(userId, studentId);
+	}
 }

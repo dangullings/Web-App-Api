@@ -2,13 +2,20 @@ package com.example.polls.controller;
 
 import java.util.List;
 
+import org.codehaus.jettison.json.JSONException;
+import org.codehaus.jettison.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -34,6 +41,11 @@ public class UserController {
     private UserRepository userRepository;
     
     private static final Logger logger = LoggerFactory.getLogger(UserController.class);
+    
+    @GetMapping("/users")
+	public ResponseEntity<Page<User>> findAll(Pageable pageable) {
+		return new ResponseEntity<>(userService.findAll(pageable), HttpStatus.OK);
+	}
     
     @GetMapping("/user/me")
     //@PreAuthorize("hasRole('USER')")
@@ -64,7 +76,17 @@ public class UserController {
         
         return user;
     }
+    
+    @PostMapping("/saveUser")
+	public ResponseEntity<User> save(@RequestBody User user) {
+		return new ResponseEntity<>(userService.saveOrUpdate(user), HttpStatus.CREATED);
+	}
 
+    @DeleteMapping("/user/{id}")
+	public ResponseEntity<String> deleteById(@PathVariable Long id) {
+		return new ResponseEntity<>(userService.deleteById(id), HttpStatus.OK);
+	}
+    
     @GetMapping("/users/{userId}/group")
     public List<Student> findAllStudentsByUserId(@PathVariable(value = "userId") long userId) {
     	System.out.println("user id "+userId);
