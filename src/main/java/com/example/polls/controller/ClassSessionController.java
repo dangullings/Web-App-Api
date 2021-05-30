@@ -21,6 +21,7 @@ import com.example.polls.model.CalendarEvent;
 import com.example.polls.model.ClassSession;
 import com.example.polls.model.Student;
 import com.example.polls.model.Student_Session;
+import com.example.polls.service.ClassDateService;
 import com.example.polls.service.ClassSessionService;
 
 @RestController
@@ -29,6 +30,8 @@ public class ClassSessionController {
     
     @Autowired
 	private ClassSessionService classSessionService;
+    @Autowired
+	private ClassDateService classDateService;
 
     //@GetMapping
 	//public ResponseEntity<Page<ClassSession>> findAll(Pageable pageable) {
@@ -57,7 +60,9 @@ public class ClassSessionController {
 	}
 
 	@DeleteMapping("{id}")
-	public ResponseEntity<String> deleteById(@PathVariable Long id) {
+	public ResponseEntity<String> deleteAllBySessionId(@PathVariable Long id) {
+		classDateService.deleteAllBySessionId(id);
+		
 		return new ResponseEntity<>(classSessionService.deleteById(id), HttpStatus.OK);
 	}
 	
@@ -73,8 +78,6 @@ public class ClassSessionController {
 	
 	@GetMapping("/{sessionId}/students")
     public List<Student> findAllStudentsById(@PathVariable(value = "sessionId") long sessionId) {
-		System.out.println("findallstudentbyid controller "+sessionId);
-		
         return classSessionService.findAllStudentsById(sessionId);
     }
 }

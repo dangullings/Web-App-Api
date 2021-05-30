@@ -36,4 +36,11 @@ public interface Student_Session_Repository extends PagingAndSortingRepository<S
 				value = "DELETE FROM class_session_students css WHERE css.student_id = :studentId",
 				nativeQuery = true)
 			void deleteAllByStudentId(@Param("studentId") Long studentId);
+		
+		@Modifying
+	    @Transactional
+		@Query(
+				value = "DELETE FROM class_session_students css WHERE css.class_session_id = :sessionId",
+				nativeQuery = true)
+			void deleteAllBySessionId(@Param("sessionId") Long sessionId);
 }

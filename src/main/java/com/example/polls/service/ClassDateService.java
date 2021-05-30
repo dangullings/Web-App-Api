@@ -48,6 +48,10 @@ public class ClassDateService {
 		return classDateRepo.save(classDate);
 	}
 
+	public void deleteAllBySessionId(Long sessionId) {
+		classDateRepo.deleteAllBySessionId(sessionId);
+	}
+	
 	public String deleteById(Long id) {
 		JSONObject jsonObject = new JSONObject();
 		try {

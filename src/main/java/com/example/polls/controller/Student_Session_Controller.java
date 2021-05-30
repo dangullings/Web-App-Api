@@ -70,4 +70,9 @@ public class Student_Session_Controller {
 		student_session_service.deleteAllByStudentId(studentId);
 	}
 	
+	@DeleteMapping("/session/{sessionId}")
+	public void deleteAllBySessionId(@PathVariable Long sessionId) {
+		student_session_service.deleteAllBySessionId(sessionId);
+	}
+	
 }

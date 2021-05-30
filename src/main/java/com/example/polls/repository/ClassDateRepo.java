@@ -6,8 +6,11 @@ import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.example.polls.model.ClassDate;
 
@@ -29,4 +32,11 @@ public interface ClassDateRepo extends JpaRepository<ClassDate, Long> {
     		value = "SELECT * FROM class_dates cd WHERE cd.session_id =:sessionId ORDER BY cd.date ASC",
     		nativeQuery = true)
     	List<ClassDate> findAllBySessionId(Long sessionId);
+    
+    @Modifying
+    @Transactional
+	@Query(
+			value = "DELETE FROM class_dates cd WHERE cd.session_id = :sessionId",
+			nativeQuery = true)
+		void deleteAllBySessionId(@Param("sessionId") Long sessionId);
 }

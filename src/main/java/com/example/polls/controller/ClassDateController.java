@@ -67,4 +67,9 @@ public class ClassDateController {
 	public ResponseEntity<String> deleteById(@PathVariable Long id) {
 		return new ResponseEntity<>(classDateService.deleteById(id), HttpStatus.OK);
 	}
+	
+	@DeleteMapping("/session/{sessionId}")
+	public void deleteAllBySessionId(@PathVariable Long sessionId) {
+		classDateService.deleteAllBySessionId(sessionId);
+	}
 }
