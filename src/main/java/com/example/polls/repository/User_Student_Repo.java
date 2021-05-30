@@ -15,21 +15,21 @@ import com.example.polls.model.User_Student;
 public interface User_Student_Repo extends PagingAndSortingRepository<User_Student, Long> {
 
 	@Query(
-			value = "SELECT student_id FROM user_students us WHERE us.user_id = :userId",
+			value = "SELECT student_id FROM user_students us WHERE us.user_id =:userId",
 			nativeQuery = true)
 		List<Long> findAllStudentIdsByUserId(@Param("userId") long userId);
 	
 	@Modifying
     @Transactional
 	@Query(
-			value = "DELETE FROM user_students us WHERE us.student_id = :studentId",
+			value = "DELETE FROM user_students us WHERE us.student_id =:studentId",
 			nativeQuery = true)
 		void deleteAllByStudentId(@Param("studentId") Long studentId);
 	
 	@Modifying
     @Transactional
 	@Query(
-			value = "DELETE FROM user_students us WHERE us.user_id = :userId AND us.student_id = :studentId",
+			value = "DELETE FROM user_students us WHERE us.user_id =:userId AND us.student_id =:studentId",
 			nativeQuery = true)
 		void deleteAllByUserIdAndStudentId(@Param("userId") Long userId, @Param("studentId") Long studentId);
 		
