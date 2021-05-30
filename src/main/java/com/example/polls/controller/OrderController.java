@@ -75,10 +75,8 @@ public class OrderController {
 	}
 
 	@DeleteMapping("{id}")
-	public ResponseEntity<String> deleteById(@PathVariable Long orderId) {
-		System.out.println("delete by order id ******************* "+orderId);
-		lineItemService.deleteByOrderId(orderId);
-		return new ResponseEntity<>(orderService.deleteById(orderId), HttpStatus.OK);
+	public ResponseEntity<String> deleteById(@PathVariable Long id) {
+		return new ResponseEntity<>(orderService.deleteById(id), HttpStatus.OK);
 	}
 	
 	@GetMapping("/{orderId}/users")

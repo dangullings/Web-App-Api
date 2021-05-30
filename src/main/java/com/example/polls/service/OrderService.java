@@ -56,10 +56,10 @@ public class OrderService {
 		return orderRepository.save(student);
 	}
 
-	public String deleteById(Long orderId) {
+	public String deleteById(Long id) {
 		JSONObject jsonObject = new JSONObject();
 		try {
-			orderRepository.deleteById(orderId);
+			orderRepository.deleteById(id);
 			jsonObject.put("message", "Item deleted successfully");
 		} catch (JSONException e) {
 			e.printStackTrace();
