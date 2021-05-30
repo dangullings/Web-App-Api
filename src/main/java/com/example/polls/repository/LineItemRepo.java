@@ -19,7 +19,7 @@ public interface LineItemRepo extends PagingAndSortingRepository<LineItem, Long>
 	@Query(
 			value = "DELETE FROM line_items li WHERE li.order_id =:orderId",
 			nativeQuery = true)
-		void deleteByOrderId(@Param("orderId") Long orderId);
+		void deleteByOrderId(Long orderId);
 	
 	@Query(
     		value = "SELECT * FROM line_items li WHERE li.order_id =:orderId",
