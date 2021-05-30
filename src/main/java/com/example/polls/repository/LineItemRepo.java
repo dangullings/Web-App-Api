@@ -17,7 +17,7 @@ public interface LineItemRepo extends PagingAndSortingRepository<LineItem, Long>
 	@Modifying
     @Transactional
 	@Query(
-			value = "DELETE * FROM line_items li WHERE li.order_id = :orderId",
+			value = "DELETE FROM line_items li WHERE li.order_id =:orderId",
 			nativeQuery = true)
 		void deleteByOrderId(@Param("orderId") Long orderId);
 	
