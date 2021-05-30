@@ -76,7 +76,7 @@ public class OrderController {
 
 	@DeleteMapping("{id}")
 	public ResponseEntity<String> deleteById(@PathVariable Long id) {
-		lineItemService.deleteByOrderId(id);
+		//lineItemService.deleteByOrderId(id);
 		return new ResponseEntity<>(orderService.deleteById(id), HttpStatus.OK);
 	}
 	

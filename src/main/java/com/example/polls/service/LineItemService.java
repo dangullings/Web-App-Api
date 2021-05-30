@@ -48,6 +48,7 @@ public class LineItemService {
 	}
 	
 	public void deleteByOrderId(Long orderId) {
+		System.out.println("delete by order id ******************* "+orderId);
 		repo.deleteByOrderId(orderId);
 	}
 	
