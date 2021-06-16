@@ -1,6 +1,7 @@
 package com.example.polls.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
@@ -9,11 +10,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.example.polls.model.LineItem;
+import com.example.polls.exception.ResourceNotFoundException;
 import com.example.polls.model.Student;
-import com.example.polls.model.Test;
 import com.example.polls.model.User;
 import com.example.polls.repository.StudentRepository;
 import com.example.polls.repository.UserRepository;
@@ -63,4 +64,28 @@ public class UserService {
 		return jsonObject.toString();
 	}
 	
+	public void updatePasswordResetToken(String passwordResetToken, String email) {
+		User user = userRepo.findByEmail(email);
+		
+		if (user != null) {
+			user.setPasswordResetToken(passwordResetToken);
+			userRepo.save(user);
+		} else {
+			throw new ResourceNotFoundException("User not found with email "+email+".", email, user);
+		}
+	}
+	
+	public Optional<User> findByPasswordResetToken(String passwordResetToken) {
+		return userRepo.findByPasswordResetToken(passwordResetToken);
+	}
+	
+	public void updatePassword(User user, String newPassword) {
+		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+		String encodePassword = passwordEncoder.encode(newPassword);
+		
+		user.setPassword(encodePassword);
+		user.setPasswordResetToken(null);
+		
+		userRepo.save(user);
+	}
 }

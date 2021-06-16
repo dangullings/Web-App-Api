@@ -67,6 +67,8 @@ public class User extends DateAudit {
     @NotBlank
     private String role;
 
+    private String passwordResetToken;
+    
     public User() {
     	this.enabled=false;
     }
@@ -151,5 +153,14 @@ public class User extends DateAudit {
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
+
+	public String getPasswordResetToken() {
+		return passwordResetToken;
+	}
+
+	public void setPasswordResetToken(String passwordResetToken) {
+		this.passwordResetToken = passwordResetToken;
+	}
+	
     
 }

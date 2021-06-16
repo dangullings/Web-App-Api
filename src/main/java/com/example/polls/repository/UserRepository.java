@@ -13,7 +13,7 @@ import com.example.polls.model.User;
 public interface UserRepository extends JpaRepository<User, Long> {
 	Optional<User> findById(Long id);
 	
-    Optional<User> findByEmail(String email);
+    User findByEmail(String email);
 
     Optional<User> findByUsernameOrEmail(String username, String email);
 
@@ -24,4 +24,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
     Boolean existsByUsername(String username);
 
     Boolean existsByEmail(String email);
+    
+    Optional<User> findByPasswordResetToken(String passwordResetToken);
 }

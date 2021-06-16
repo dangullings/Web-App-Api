@@ -2,8 +2,6 @@ package com.example.polls.controller;
 
 import java.util.List;
 
-import org.codehaus.jettison.json.JSONException;
-import org.codehaus.jettison.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,7 +21,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.polls.exception.ResourceNotFoundException;
 import com.example.polls.model.Student;
-import com.example.polls.model.Test;
 import com.example.polls.model.User;
 import com.example.polls.payload.UserIdentityAvailability;
 import com.example.polls.payload.UserSummary;
@@ -30,6 +28,8 @@ import com.example.polls.repository.UserRepository;
 import com.example.polls.security.CurrentUser;
 import com.example.polls.security.UserPrincipal;
 import com.example.polls.service.UserService;
+
+import net.bytebuddy.utility.RandomString;
 
 @RestController
 @RequestMapping("/api")
@@ -72,16 +72,57 @@ public class UserController {
         User user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new ResourceNotFoundException("User", "username", username));
 
-        System.out.println("name test "+user.toString());
+        System.out.println("name test "+user.getName());
         
         return user;
     }
     
     @PostMapping("/saveUser")
 	public ResponseEntity<User> save(@RequestBody User user) {
-		return new ResponseEntity<>(userService.saveOrUpdate(user), HttpStatus.CREATED);
+    	Boolean emailAvailable, usernameAvailable;
+    	User currentUser = userService.findById(user.getId());
+    	
+    	if (currentUser == null) {
+    		return new ResponseEntity<>(userService.saveOrUpdate(user), HttpStatus.CREATED);
+    	}
+    	
+    	if (user.getEmail().equalsIgnoreCase(currentUser.getEmail())) {
+    		emailAvailable = true;
+    	} else {
+    		emailAvailable = userRepository.existsByEmail(user.getEmail());
+    	}
+    	if (user.getUsername().equalsIgnoreCase(currentUser.getUsername())) {
+    		usernameAvailable = true;
+    	} else {
+    		usernameAvailable = userRepository.existsByUsername(user.getEmail());
+    	}
+    	
+    	System.out.println("email avail "+emailAvailable);
+    	System.out.println("username avail "+usernameAvailable);
+    	
+    	if (emailAvailable && usernameAvailable) {
+    		return new ResponseEntity<>(userService.saveOrUpdate(user), HttpStatus.CREATED);
+    	} else {
+    		if (!emailAvailable) {
+    			user.setEmail("exists");
+    		}
+    		if (!usernameAvailable) {
+    			user.setUsername("exists");
+    		}
+    		return new ResponseEntity<>(user, HttpStatus.CREATED);
+    	}
 	}
 
+    @PostMapping("/user/forgot_password")
+	public String forgotPassword(@RequestBody String email) {
+    	String passwordResetToken = RandomString.make(45);
+    	
+    	userService.updatePasswordResetToken(passwordResetToken, email);
+    	sendEmail(email);
+    	
+    	return "";
+	}
+    
     @DeleteMapping("/user/{id}")
 	public ResponseEntity<String> deleteById(@PathVariable Long id) {
 		return new ResponseEntity<>(userService.deleteById(id), HttpStatus.OK);
@@ -89,7 +130,6 @@ public class UserController {
     
     @GetMapping("/users/{userId}/group")
     public List<Student> findAllStudentsByUserId(@PathVariable(value = "userId") long userId) {
-    	System.out.println("user id "+userId);
         return userService.findAllStudentsByUserId(userId);
     }
     
@@ -97,5 +137,17 @@ public class UserController {
 	public ResponseEntity<User> findById(@PathVariable Long id) {
 		return new ResponseEntity<>(userService.findById(id), HttpStatus.OK);
 	}
+    
+    private void sendEmail(String email) {
+    	SimpleMailMessage mailMessage = new SimpleMailMessage();
+        mailMessage.setTo(email);
+        mailMessage.setSubject("Link to reset your password.");
+        mailMessage.setFrom("dangullings.app@gmail.com");
+        //mailMessage.setText("You requested to reset your password. Here is the link below."
+        //+"http://localhost:8080/api/auth/confirm-account?token="+confirmationToken.getConfirmationToken());
+
+        //emailSenderService.sendEmail(mailMessage);
+    	
+    }
 
 }
