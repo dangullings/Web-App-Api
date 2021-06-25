@@ -27,6 +27,7 @@ import com.example.polls.payload.UserSummary;
 import com.example.polls.repository.UserRepository;
 import com.example.polls.security.CurrentUser;
 import com.example.polls.security.UserPrincipal;
+import com.example.polls.service.EmailSenderService;
 import com.example.polls.service.UserService;
 
 import net.bytebuddy.utility.RandomString;
@@ -39,6 +40,8 @@ public class UserController {
     private UserService userService;
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    EmailSenderService emailSenderService;
     
     private static final Logger logger = LoggerFactory.getLogger(UserController.class);
     
@@ -72,8 +75,6 @@ public class UserController {
         User user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new ResourceNotFoundException("User", "username", username));
 
-        System.out.println("name test "+user.getName());
-        
         return user;
     }
     
@@ -113,8 +114,8 @@ public class UserController {
     	}
 	}
 
-    @PostMapping("/user/forgot_password")
-	public String forgotPassword(@RequestBody String email) {
+    @PostMapping("/user/forgot_password/{email}")
+	public String forgotPassword(@RequestParam(value = "email") String email) {
     	String passwordResetToken = RandomString.make(45);
     	
     	userService.updatePasswordResetToken(passwordResetToken, email);
@@ -143,10 +144,12 @@ public class UserController {
         mailMessage.setTo(email);
         mailMessage.setSubject("Link to reset your password.");
         mailMessage.setFrom("dangullings.app@gmail.com");
-        //mailMessage.setText("You requested to reset your password. Here is the link below."
-        //+"http://localhost:8080/api/auth/confirm-account?token="+confirmationToken.getConfirmationToken());
+        mailMessage.setText("You requested to reset your password. Here is the link below."
+        +"http://localhost:8080/api/auth/confirm-account?token=");
 
-        //emailSenderService.sendEmail(mailMessage);
+        System.out.println("send email "+email);
+        
+        emailSenderService.sendEmail(mailMessage);
     	
     }
 

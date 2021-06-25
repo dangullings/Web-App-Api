@@ -40,8 +40,6 @@ public class UserService {
 		List<Long> studentIds = user_student_repo.findAllStudentIdsByUserId(userId);
 		List<Student> students = (List<Student>) studentRepository.findAllById(studentIds);
 		
-		System.out.println("user service user id "+userId);
-		
 		return students;
 	}
 	
@@ -65,14 +63,29 @@ public class UserService {
 	}
 	
 	public void updatePasswordResetToken(String passwordResetToken, String email) {
-		User user = userRepo.findByEmail(email);
 		
-		if (user != null) {
-			user.setPasswordResetToken(passwordResetToken);
-			userRepo.save(user);
+		String goodEmail = email;
+		
+		if (goodEmail.equalsIgnoreCase("dangullings@gmail.com")) {
+			System.out.print("we equal each other! "+" "+goodEmail);
 		} else {
-			throw new ResourceNotFoundException("User not found with email "+email+".", email, user);
+			System.out.print("we do not equal each other! "+" "+goodEmail);
 		}
+		
+		
+		Optional<User> user = userRepo.findUserByEmail("dangullings@gmail.com");
+		System.out.print("user service updatepwresettoken "+user+" "+email);
+		return;
+		
+		
+		//if (user != null) {
+		//	user.setPasswordResetToken(passwordResetToken);
+		//	System.out.print("user service user is not null");
+		//	userRepo.save(user);
+		//} else {
+		//	System.out.print("user service user IS NULL");
+		//	throw new ResourceNotFoundException("User not found with email "+email+".", email, user);
+		//}
 	}
 	
 	public Optional<User> findByPasswordResetToken(String passwordResetToken) {
