@@ -26,12 +26,8 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     Boolean existsByEmail(String email);
     
-    Optional<User> findByPasswordResetToken(String passwordResetToken);
+    User findByPasswordResetToken(String passwordResetToken);
     
-    Optional<User> findByEmail(String email);
-    
-    @Query(
-    		value = "SELECT * FROM users u WHERE u.email LIKE :%email%",
-    		nativeQuery = true)
-    	Optional<User> findUserByEmail(String email);
+    User findByEmail(String email);
+   
 }

@@ -51,10 +51,8 @@ public class User extends DateAudit {
     @Email
     private String email;
 
-    @NotBlank
     private String address;
     
-    @NotBlank
     private String phoneNumber;
     
     @NotBlank
@@ -160,6 +158,13 @@ public class User extends DateAudit {
 
 	public void setPasswordResetToken(String passwordResetToken) {
 		this.passwordResetToken = passwordResetToken;
+	}
+
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", name=" + name + ", username=" + username + ", email=" + email + ", address="
+				+ address + ", phoneNumber=" + phoneNumber + ", password=" + password + ", enabled=" + enabled
+				+ ", role=" + role + ", passwordResetToken=" + passwordResetToken + "]";
 	}
 	
     

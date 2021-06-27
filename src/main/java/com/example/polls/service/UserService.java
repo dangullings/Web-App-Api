@@ -62,33 +62,20 @@ public class UserService {
 		return jsonObject.toString();
 	}
 	
-	public void updatePasswordResetToken(String passwordResetToken, String email) {
+	public void updateResetPasswordToken(String passwordResetToken, String email) {
+		email = email.replaceAll("^\"|\"$", "");
+
+		User user = userRepo.findByEmail(email);
 		
-		String goodEmail = email;
-		
-		if (goodEmail.equalsIgnoreCase("dangullings@gmail.com")) {
-			System.out.print("we equal each other! "+" "+goodEmail);
+		if (user != null) {
+			user.setPasswordResetToken(passwordResetToken);
+			userRepo.save(user);
 		} else {
-			System.out.print("we do not equal each other! "+" "+goodEmail);
+			throw new ResourceNotFoundException("User not found with email "+email+".", email, user);
 		}
-		
-		
-		Optional<User> user = userRepo.findUserByEmail("dangullings@gmail.com");
-		System.out.print("user service updatepwresettoken "+user+" "+email);
-		return;
-		
-		
-		//if (user != null) {
-		//	user.setPasswordResetToken(passwordResetToken);
-		//	System.out.print("user service user is not null");
-		//	userRepo.save(user);
-		//} else {
-		//	System.out.print("user service user IS NULL");
-		//	throw new ResourceNotFoundException("User not found with email "+email+".", email, user);
-		//}
 	}
 	
-	public Optional<User> findByPasswordResetToken(String passwordResetToken) {
+	public User getByResetPasswordToken(String passwordResetToken) {
 		return userRepo.findByPasswordResetToken(passwordResetToken);
 	}
 	
