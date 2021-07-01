@@ -133,40 +133,5 @@ public class UserController {
 	public ResponseEntity<User> findById(@PathVariable Long id) {
 		return new ResponseEntity<>(userService.findById(id), HttpStatus.OK);
 	}
-    
-	/*
-	 * private void sendEmail(String email, String link) { SimpleMailMessage
-	 * mailMessage = new SimpleMailMessage(); mailMessage.setTo(email);
-	 * mailMessage.setSubject("Link to reset your password.");
-	 * mailMessage.setFrom("dangullings.app@gmail.com");
-	 * mailMessage.setText("You requested to reset your password. Reset it here: "
-	 * +link);
-	 * 
-	 * emailSenderService.sendEmail(mailMessage); }
-	 * 
-	 * @PostMapping("/user/forgot_password") public String
-	 * forgotPassword(HttpServletRequest request, @RequestBody String email) {
-	 * String passwordResetToken = RandomString.make(45);
-	 * 
-	 * try { userService.updatePasswordResetToken(passwordResetToken, email); String
-	 * resetPasswordLink = Utility.getSiteURL(request) + "/reset_password?token=" +
-	 * passwordResetToken; sendEmail(email, resetPasswordLink);
-	 * 
-	 * } catch (ResourceNotFoundException ex) { return "error"; }
-	 * 
-	 * return ""; }
-	 * 
-	 * @RequestMapping("/reset_password") public ResponseEntity<?>
-	 * resetPassword(@RequestParam("token") String token){ User user =
-	 * userService.findByPasswordResetToken(token);
-	 * 
-	 * if (user != null) { System.out.println("user token found "+user.toString());
-	 * }
-	 * 
-	 * HttpHeaders headers = new HttpHeaders(); headers.add("Location",
-	 * "http://localhost:3000/students"); return new
-	 * ResponseEntity("You can now login. Please close out this window. Check your email for login credentials."
-	 * , HttpStatus.OK); }
-	 */
 
 }
