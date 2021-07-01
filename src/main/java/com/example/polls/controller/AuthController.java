@@ -110,7 +110,7 @@ public class AuthController {
         SimpleMailMessage mailMessage = new SimpleMailMessage();
         mailMessage.setTo(user.getEmail());
         mailMessage.setSubject("Complete Registration!");
-        mailMessage.setFrom("dangullings@gmail.com");
+        mailMessage.setFrom("dangullings.app@gmail.com");
         mailMessage.setText("To complete your registration, please click here: "
         +"http://localhost:8080/api/auth/confirm-account?token="+confirmationToken.getConfirmationToken());
 
@@ -136,7 +136,7 @@ public class AuthController {
 		  	SimpleMailMessage mailMessage = new SimpleMailMessage();
 	        mailMessage.setTo(user.getEmail());
 	        mailMessage.setSubject("Registration Complete!");
-	        mailMessage.setFrom("dangullings@gmail.com");
+	        mailMessage.setFrom("dangullings.app@gmail.com");
 	        mailMessage.setText("Thank you for confirming your email and completing registration, "+user.getName()+"!\n\nUsername: "+user.getUsername()+"\n\nPassword: "+passwordBeforeEncrypted+"\n\nKeep this info for your records.");
 
 	        emailSenderService.sendEmail(mailMessage);
