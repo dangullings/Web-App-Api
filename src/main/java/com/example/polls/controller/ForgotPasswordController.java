@@ -38,24 +38,18 @@ public class ForgotPasswordController {
     }
  
     @PostMapping("/forgot_password")
-    public String processForgotPassword(HttpServletRequest request, @RequestBody String email, Model model) {
+    public void processForgotPassword(HttpServletRequest request, @RequestBody String email, Model model) {
         String token = RandomString.make(30);
-         
-        System.out.println("forgot password"+email);
         
         try {
             userService.updateResetPasswordToken(token, email);
             String resetPasswordLink = Utility.getSiteURL(request) + "/api/reset_password?token=" + token;
             sendEmail(email, resetPasswordLink);
-            model.addAttribute("message", "We have sent a reset password link to your email. Please check.");
              
         } catch (ResourceNotFoundException ex) {
-            model.addAttribute("error", ex.getMessage());
         } catch (UnsupportedEncodingException | MessagingException e) {
-            model.addAttribute("error", "Error while sending email");
         }
-             
-        return "forgot_password_form";
+           
     }
      
     public void sendEmail(String recipientEmail, String link)
@@ -118,6 +112,39 @@ public class ForgotPasswordController {
             model.addAttribute("message", "You have successfully changed your password.");
         }
          
+        try {
+			sendEmailPasswordChanged(user.getEmail(), password);
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (MessagingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        
         return "message";
     }
+    
+    public void sendEmailPasswordChanged(String recipientEmail, String password)
+            throws MessagingException, UnsupportedEncodingException {
+        MimeMessage message = mailSender.createMimeMessage();              
+        MimeMessageHelper helper = new MimeMessageHelper(message);
+         
+        helper.setFrom("dangullings.app@gmail.com", "Personal Project");
+        helper.setTo(recipientEmail);
+         
+        String subject = "Your password has been changed.";
+         
+        String content = "<p>Hello,</p>"
+                + "<p>You have changed your password.</p>"
+                + "<p>Password: " + password + "</p>"
+                + "<p>If you didn't change your password, reset it now.</p>";
+         
+        helper.setSubject(subject);
+         
+        helper.setText(content, true);
+         
+        mailSender.send(message);
+    }
+    
 }
