@@ -18,36 +18,36 @@ public interface Student_Event_Repository extends PagingAndSortingRepository<Cal
 	@Query(
 			value = "SELECT * FROM calendar_events_students ces WHERE ces.student_id =:studentId",
 			nativeQuery = true)
-		List<CalendarEvent_Student> findAllByStudentId(@Param("studentId") Long studentId);
+		List<CalendarEvent_Student> findAllByStudentId(Long studentId);
 		
 		@Query(
 				value = "SELECT * FROM calendar_events_students ces WHERE ces.calendar_event_id =:eventId",
 				nativeQuery = true)
-		List<CalendarEvent_Student> findAllByEventId(@Param("eventId") Long eventId);
+		List<CalendarEvent_Student> findAllByEventId(Long eventId);
 		
 		@Query(
 				value = "SELECT student_id FROM calendar_events_students ces WHERE ces.calendar_event_id =:eventId",
 				nativeQuery = true)
-			List<Long> findAllByCalendarEventId(@Param("eventId") long eventId);
+			List<Long> findAllByCalendarEventId(Long eventId);
 		
 		@Modifying
 	    @Transactional
 		@Query(
 				value = "DELETE FROM calendar_events_students ces WHERE ces.calendar_event_id =:eventId AND ces.student_id =:studentId",
 				nativeQuery = true)
-			void deleteAllByEventIdAndStudentId(@Param("eventId") Long eventId, @Param("studentId") Long studentId);
+			void deleteAllByEventIdAndStudentId(Long eventId, Long studentId);
 		
 		@Modifying
 	    @Transactional
 		@Query(
 				value = "DELETE FROM calendar_events_students ces WHERE ces.calendar_event_id =:eventId",
 				nativeQuery = true)
-			void deleteAllByEventId(@Param("eventId") Long eventId);
+			void deleteAllByEventId(Long eventId);
 		
 		@Modifying
 	    @Transactional
 		@Query(
 				value = "DELETE FROM calendar_events_students ces WHERE ces.student_id =:studentId",
 				nativeQuery = true)
-			void deleteAllByStudentId(@Param("studentId") Long studentId);
+			void deleteAllByStudentId(Long studentId);
 }

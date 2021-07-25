@@ -17,14 +17,14 @@ public interface User_Student_Repo extends PagingAndSortingRepository<User_Stude
 	@Query(
 			value = "SELECT student_id FROM user_students us WHERE us.user_id =:userId",
 			nativeQuery = true)
-		List<Long> findAllStudentIdsByUserId(@Param("userId") long userId);
+		List<Long> findAllStudentIdsByUserId(Long userId);
 	
 	@Modifying
     @Transactional
 	@Query(
 			value = "DELETE FROM user_students us WHERE us.student_id =:studentId",
 			nativeQuery = true)
-		void deleteAllByStudentId(@Param("studentId") Long studentId);
+		void deleteAllByStudentId(Long studentId);
 	
 	@Modifying
     @Transactional

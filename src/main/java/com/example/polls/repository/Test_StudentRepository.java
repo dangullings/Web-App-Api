@@ -22,33 +22,33 @@ public interface Test_StudentRepository extends PagingAndSortingRepository<Test_
 	@Query(
 			value = "SELECT * FROM test_student ts WHERE ts.test_id =:testId and ts.student_id =:studentId",
 			nativeQuery = true)
-		Test_Student findByTestIdAndStudentId(@Param("testId") Long testId, @Param("studentId") Long studentId);
+		Test_Student findByTestIdAndStudentId(Long testId, Long studentId);
 	
 	@Modifying
     @Transactional
 	@Query(
 			value = "DELETE FROM test_student ts WHERE ts.test_id =:testId",
 			nativeQuery = true)
-		void deleteAllByTestId(@Param("testId") Long testId);
+		void deleteAllByTestId(Long testId);
 	
 	@Modifying
     @Transactional
 	@Query(
 			value = "DELETE FROM test_student ts WHERE ts.student_id =:studentId",
 			nativeQuery = true)
-		void deleteAllByStudentId(@Param("studentId") Long studentId);
+		void deleteAllByStudentId(Long studentId);
 	
 	@Modifying
     @Transactional
 	@Query(
 			value = "DELETE FROM test_student ts WHERE ts.test_id =:testId AND ts.student_id =:studentId",
 			nativeQuery = true)
-		void deleteAllByTestIdAndStudentId(@Param("testId") Long testId, @Param("studentId") Long studentId);
+		void deleteAllByTestIdAndStudentId(Long testId, Long studentId);
 		
 	@Query(
 			value = "SELECT * FROM test_student ts WHERE ts.student_id =:studentId",
 			nativeQuery = true)
-		Page<Test_Student> findAllByStudentId(Pageable pageable, @Param("studentId") Long studentId);
+		Page<Test_Student> findAllByStudentId(Pageable pageable, Long studentId);
 		
 		@Query(
 	    		value = "SELECT student_id FROM test_student ts WHERE ts.test_id =:testId",

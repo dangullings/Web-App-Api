@@ -38,5 +38,5 @@ public interface ClassDateRepo extends JpaRepository<ClassDate, Long> {
 	@Query(
 			value = "DELETE FROM class_dates cd WHERE cd.session_id =:sessionId",
 			nativeQuery = true)
-		void deleteAllBySessionId(@Param("sessionId") Long sessionId);
+		void deleteAllBySessionId(Long sessionId);
 }
