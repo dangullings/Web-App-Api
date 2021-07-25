@@ -125,12 +125,14 @@ public class AuthController {
 
         confirmationTokenRepository.save(confirmationToken);
 
+        String url = "kkc-webapp-backend.herokuapp.com"; // localhost:8080
+        
         SimpleMailMessage mailMessage = new SimpleMailMessage();
         mailMessage.setTo(user.getEmail());
         mailMessage.setSubject("Complete Registration!");
         mailMessage.setFrom("dangullings.app@gmail.com");
         mailMessage.setText("To complete your registration, please click here: "
-        +"http://localhost:8080/api/auth/confirm-account?token="+confirmationToken.getConfirmationToken());
+        +"http://"+url+"/api/auth/confirm-account?token="+confirmationToken.getConfirmationToken());
 
         emailSenderService.sendEmail(mailMessage);
         
