@@ -166,7 +166,7 @@ public class AuthController {
 	  
 	  	HttpHeaders headers = new HttpHeaders();
 	    headers.add("Location", "https://kkc-webapp.herokuapp.com/login");    
-	    return new ResponseEntity("Thank you, this confirms your email! You may close this window login at <a href=\"https://kkc-webapp.herokuapp.com/login\" target=\"_blank\">https://kkc-webapp.herokuapp.com/login</a>", HttpStatus.OK);	
+	    return new ResponseEntity("Thank you, this confirms your email! You may close this window and login at <a href=\"https://kkc-webapp.herokuapp.com/login\" target=\"_blank\">https://kkc-webapp.herokuapp.com/login</a>", HttpStatus.OK);	
     }
 	 
      
