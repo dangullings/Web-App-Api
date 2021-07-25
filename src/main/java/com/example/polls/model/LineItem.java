@@ -21,13 +21,21 @@ public class LineItem {
     
     private long itemId;
     
-    private String color, size;
+    private String color, size, gender;
     private BigDecimal price;
     private int quantity;
 
     public LineItem(){
 
     }
+
+	public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
 
 	public long getId() {
 		return id;

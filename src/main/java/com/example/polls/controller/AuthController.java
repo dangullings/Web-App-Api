@@ -3,6 +3,8 @@ package com.example.polls.controller;
 import java.net.URI;
 import java.util.Collections;
 import java.util.Optional;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.validation.Valid;
 
@@ -67,8 +69,24 @@ public class AuthController {
 
     @PostMapping("/signin")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) { 
-    	
-    	 System.out.println("authenticateUser --------------"+loginRequest.toString());
+    	 Optional<User> user = Optional.ofNullable(new User());
+    	 
+    	 String userLabel = loginRequest.getUsernameOrEmail();
+         Pattern pattern = Pattern.compile("[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}");
+         Matcher mat = pattern.matcher(userLabel);
+
+         if(mat.matches()){
+        	 user = Optional.ofNullable(userRepository.findByEmail(userLabel));
+         }else{
+        	 user = userRepository.findByUsername(userLabel);
+         }
+         
+         if (user.isPresent()) {
+        	 if (!user.get().isEnabled()) {
+        		 return new ResponseEntity(new ApiResponse(false, "user not enabled"),
+                     HttpStatus.BAD_REQUEST);
+        	 }
+         }
     	 
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
