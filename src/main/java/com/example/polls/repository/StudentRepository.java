@@ -15,13 +15,13 @@ import antlr.collections.List;
 public interface StudentRepository extends PagingAndSortingRepository<Student, Long> {
 
 	@Query(
-		value = "SELECT * FROM students s WHERE s.active =:active AND s.first_name LIKE :searchText% OR s.last_name LIKE :searchText%"
-				+ " ORDER BY s.joined DESC",
+		value = "SELECT * FROM students WHERE students.active =:active AND students.first_name LIKE :searchText% OR students.last_name LIKE :searchText%"
+				+ " ORDER BY students.joined DESC",
 		nativeQuery = true)
 	Page<Student> findAll(Pageable pageable, String searchText, boolean active);
 	
 	@Query(
-		value = "SELECT * FROM Students s WHERE s.active =:active ORDER BY s.joined DESC",
+		value = "SELECT * FROM students WHERE students.active =:active ORDER BY students.joined DESC",
 		nativeQuery = true)
 	Page<Student> findAllByActive(Pageable pageable, boolean active);
 

@@ -16,14 +16,14 @@ public interface AttendanceRepo extends JpaRepository<Attendance, Long> {
     Optional<Attendance> findById(Long attendanceId);
     
 	@Query(
-			value = "SELECT * FROM attendance a WHERE a.class_date_id =:classDateId and a.student_id =:studentId",
+			value = "SELECT * FROM attendance WHERE attendance.class_date_id =:classDateId and attendance.student_id =:studentId",
 			nativeQuery = true)
 		Attendance findByClassDateIdAndStudentId(Long classDateId, Long studentId);
 	
 	@Modifying
     @Transactional
 	@Query(
-			value = "DELETE FROM attendance a WHERE a.student_id =:studentId",
+			value = "DELETE FROM attendance WHERE attendance.student_id =:studentId",
 			nativeQuery = true)
 		void deleteAllByStudentId(Long studentId);
 }

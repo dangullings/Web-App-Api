@@ -17,17 +17,17 @@ import com.example.polls.model.CalendarEvent;
 public interface EventRepo extends JpaRepository<CalendarEvent, Long> {
 
 	@Query(
-    		value = "SELECT * FROM calendar_events e WHERE e.month =:month AND e.year =:year",
+    		value = "SELECT * FROM calendar_events WHERE calendar_events.month =:month AND calendar_events.year =:year",
     		nativeQuery = true)
     	Page<CalendarEvent> findAllByMonthYear(Pageable pageable, String month, String year);
 	
 	@Query(
-    		value = "SELECT * FROM calendar_events e ORDER BY e.date Asc LIMIT 10",
+    		value = "SELECT * FROM calendar_events ORDER BY calendar_events.date Asc LIMIT 10",
     		nativeQuery = true)
     	List<CalendarEvent> findAllByDateAsc();
 	
 	@Query(
-    		value = "SELECT * FROM calendar_events e ORDER BY e.date Desc LIMIT 10",
+    		value = "SELECT * FROM calendar_events ORDER BY calendar_events.date Desc LIMIT 10",
     		nativeQuery = true)
     	List<CalendarEvent> findAllByDateDesc();
 }

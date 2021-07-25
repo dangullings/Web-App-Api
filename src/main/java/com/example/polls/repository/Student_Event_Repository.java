@@ -16,38 +16,38 @@ public interface Student_Event_Repository extends PagingAndSortingRepository<Cal
 	Optional<CalendarEvent_Student> findById(Long studentSessionId);
 	
 	@Query(
-			value = "SELECT * FROM calendar_events_students ces WHERE ces.student_id =:studentId",
+			value = "SELECT * FROM calendar_events_students WHERE calendar_events_students.student_id =:studentId",
 			nativeQuery = true)
 		List<CalendarEvent_Student> findAllByStudentId(Long studentId);
 		
 		@Query(
-				value = "SELECT * FROM calendar_events_students ces WHERE ces.calendar_event_id =:eventId",
+				value = "SELECT * FROM calendar_events_students WHERE calendar_events_students.calendar_event_id =:eventId",
 				nativeQuery = true)
 		List<CalendarEvent_Student> findAllByEventId(Long eventId);
 		
 		@Query(
-				value = "SELECT student_id FROM calendar_events_students ces WHERE ces.calendar_event_id =:eventId",
+				value = "SELECT student_id FROM calendar_events_students WHERE calendar_events_students.calendar_event_id =:eventId",
 				nativeQuery = true)
 			List<Long> findAllByCalendarEventId(Long eventId);
 		
 		@Modifying
 	    @Transactional
 		@Query(
-				value = "DELETE FROM calendar_events_students ces WHERE ces.calendar_event_id =:eventId AND ces.student_id =:studentId",
+				value = "DELETE FROM calendar_events_students WHERE calendar_events_students.calendar_event_id =:eventId AND calendar_events_students.student_id =:studentId",
 				nativeQuery = true)
 			void deleteAllByEventIdAndStudentId(Long eventId, Long studentId);
 		
 		@Modifying
 	    @Transactional
 		@Query(
-				value = "DELETE FROM calendar_events_students ces WHERE ces.calendar_event_id =:eventId",
+				value = "DELETE FROM calendar_events_students WHERE calendar_events_students.calendar_event_id =:eventId",
 				nativeQuery = true)
 			void deleteAllByEventId(Long eventId);
 		
 		@Modifying
 	    @Transactional
 		@Query(
-				value = "DELETE FROM calendar_events_students ces WHERE ces.student_id =:studentId",
+				value = "DELETE FROM calendar_events_students WHERE calendar_events_students.student_id =:studentId",
 				nativeQuery = true)
 			void deleteAllByStudentId(Long studentId);
 }

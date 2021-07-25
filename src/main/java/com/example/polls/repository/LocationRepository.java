@@ -13,7 +13,7 @@ import com.example.polls.model.Location;
 public interface LocationRepository extends PagingAndSortingRepository<Location, Long> {
 
 	@Query(
-    		value = "SELECT * FROM locations l WHERE l.name =:name",
+    		value = "SELECT * FROM locations WHERE locations.name =:name",
     		nativeQuery = true)
     	Location findByName(String name);
 	

@@ -19,24 +19,24 @@ public interface ClassDateRepo extends JpaRepository<ClassDate, Long> {
     Optional<ClassDate> findById(Long classDateId);
     
     @Query(
-    		value = "SELECT * FROM class_dates cd WHERE cd.month =:month AND cd.year =:year",
+    		value = "SELECT * FROM class_dates WHERE class_dates.month =:month AND class_dates.year =:year",
     		nativeQuery = true)
     	Page<ClassDate> findAllByMonthYear(Pageable pageable, String month, String year);
     
     @Query(
-    		value = "SELECT * FROM class_dates cd WHERE cd.month =:month AND cd.year =:year AND cd.session_id =:session",
+    		value = "SELECT * FROM class_dates WHERE class_dates.month =:month AND class_dates.year =:year AND class_dates.session_id =:session",
     		nativeQuery = true)
     List<ClassDate> findAllByMonthYearAndSession(String month, String year, long session);
     
     @Query(
-    		value = "SELECT * FROM class_dates cd WHERE cd.session_id =:sessionId ORDER BY cd.date ASC",
+    		value = "SELECT * FROM class_dates WHERE class_dates.session_id =:sessionId ORDER BY class_dates.date ASC",
     		nativeQuery = true)
     	List<ClassDate> findAllBySessionId(Long sessionId);
     
     @Modifying
     @Transactional
 	@Query(
-			value = "DELETE FROM class_dates cd WHERE cd.session_id =:sessionId",
+			value = "DELETE FROM class_dates WHERE class_dates.session_id =:sessionId",
 			nativeQuery = true)
 		void deleteAllBySessionId(Long sessionId);
 }

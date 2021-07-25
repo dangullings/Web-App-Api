@@ -13,12 +13,12 @@ import com.example.polls.model.Item;
 public interface ItemRepository extends PagingAndSortingRepository<Item, Long> {
 
 	@Query(
-		value = "SELECT * FROM items i WHERE i.active = true AND i.type LIKE %:searchText% OR i.name LIKE %:searchText% OR i.description LIKE %:searchText%",
+		value = "SELECT * FROM items WHERE items.active = true AND items.type LIKE %:searchText% OR items.name LIKE %:searchText% OR items.description LIKE %:searchText%",
 		nativeQuery = true)
 	Page<Item> findAll(Pageable pageable, String searchText);
 	
 	@Query(
-		value = "SELECT * FROM items i WHERE i.active = true",
+		value = "SELECT * FROM items WHERE items.active = true",
 		nativeQuery = true)
 	Page<Item> findAllItemsByActive(Pageable pageable);
 

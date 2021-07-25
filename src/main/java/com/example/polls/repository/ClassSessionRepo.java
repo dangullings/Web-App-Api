@@ -19,17 +19,17 @@ public interface ClassSessionRepo extends JpaRepository<ClassSession, Long> {
     Optional<ClassSession> findById(Long classSessionId);
     
     @Query(
-    		value = "SELECT * FROM class_sessions cs ORDER BY cs.start_date DESC LIMIT 10",
+    		value = "SELECT * FROM class_sessions ORDER BY class_sessions.start_date DESC LIMIT 10",
     		nativeQuery = true)
     	List<ClassSession> findAllByDateDesc();
     
     @Query(
-    		value = "SELECT * FROM class_sessions cs ORDER BY cs.start_date Asc LIMIT 10",
+    		value = "SELECT * FROM class_sessions ORDER BY class_sessions.start_date Asc LIMIT 10",
     		nativeQuery = true)
     	List<ClassSession> findAllByDateAsc();
     
     @Query(
-    		value = "SELECT * FROM class_sessions cs ORDER BY cs.end_date DESC",
+    		value = "SELECT * FROM class_sessions ORDER BY class_sessions.end_date DESC",
     		nativeQuery = true)
     	Page<ClassSession> findAllByEndDate(Pageable pageable);
 }

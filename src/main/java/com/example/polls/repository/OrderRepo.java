@@ -16,23 +16,23 @@ import com.example.polls.model.Student;
 public interface OrderRepo extends PagingAndSortingRepository<Order, Long> {
 	
 	@Query(
-			value = "SELECT * FROM orders o WHERE o.is_fulfilled =:fulfilled AND o.note LIKE %:searchText%"
-					+ " ORDER BY o.date DESC",
+			value = "SELECT * FROM orders WHERE orders.is_fulfilled =:fulfilled AND orders.note LIKE %:searchText%"
+					+ " ORDER BY orders.date DESC",
 			nativeQuery = true)
 		Page<Order> findAll(Pageable pageable, String searchText, boolean fulfilled);
 	
 	@Query(
-			value = "SELECT * FROM orders o WHERE o.is_fulfilled =:fulfilled ORDER BY o.date DESC",
+			value = "SELECT * FROM orders WHERE orders.is_fulfilled =:fulfilled ORDER BY orders.date DESC",
 			nativeQuery = true)
 		Page<Order> findAllByFulfilled(Pageable pageable, boolean fulfilled);
 	
 	@Query(
-    		value = "SELECT * FROM orders o ORDER BY o.date DESC",
+    		value = "SELECT * FROM orders ORDER BY orders.date DESC",
     		nativeQuery = true)
     	Page<Order> findAllOrderByDate(Pageable pageable);
 	
 	@Query(
-    		value = "SELECT user_id FROM orders o WHERE o.id =:orderId",
+    		value = "SELECT user_id FROM orders WHERE orders.id =:orderId",
     		nativeQuery = true)
     	List<Long> findAllUsersByOrderId(Long orderId);
 }
