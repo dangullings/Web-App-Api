@@ -29,8 +29,8 @@ public interface User_Student_Repo extends PagingAndSortingRepository<User_Stude
 	@Modifying
     @Transactional
 	@Query(
-			value = "DELETE FROM user_students us WHERE us.user_id = userId AND us.student_id = studentId",
+			value = "DELETE FROM user_students WHERE user_students.user_id =:userId AND user_students.student_id =:studentId",
 			nativeQuery = true)
-		void deleteAllByUserIdAndStudentId(@Param("userId") Long userId, @Param("studentId") Long studentId);
+		void deleteAllByUserIdAndStudentId(Long userId, Long studentId);
 		
 }
