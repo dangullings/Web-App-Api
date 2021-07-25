@@ -41,7 +41,7 @@ public interface Test_StudentRepository extends PagingAndSortingRepository<Test_
 	@Modifying
     @Transactional
 	@Query(
-			value = "DELETE FROM test_student ts WHERE ts.test_id =:testId AND ts.student_id =:studentId",
+			value = "DELETE FROM test_student WHERE test_student.test_id =:testId AND test_student.student_id =:studentId",
 			nativeQuery = true)
 		void deleteAllByTestIdAndStudentId(Long testId, Long studentId);
 		
