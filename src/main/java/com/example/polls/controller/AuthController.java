@@ -131,7 +131,7 @@ public class AuthController {
         mailMessage.setTo(user.getEmail());
         mailMessage.setSubject("Complete Registration!");
         mailMessage.setFrom("dangullings.app@gmail.com");
-        mailMessage.setText("To complete your registration, please click here: "
+        mailMessage.setText("To complete your registration, click this link."
         +"http://"+url+"/api/auth/confirm-account?token="+confirmationToken.getConfirmationToken());
 
         emailSenderService.sendEmail(mailMessage);
@@ -157,7 +157,7 @@ public class AuthController {
 	        mailMessage.setTo(user.getEmail());
 	        mailMessage.setSubject("Registration Complete!");
 	        mailMessage.setFrom("dangullings.app@gmail.com");
-	        mailMessage.setText("Thank you for confirming your email and completing registration, "+user.getName()+"!\n\nUsername: "+user.getUsername()+"\n\nPassword: "+passwordBeforeEncrypted+"\n\nKeep this info for your records.");
+	        mailMessage.setText("Thank you for registering the app, "+user.getName()+"!\n\nUsername: "+user.getUsername()+"\n\nPassword: "+passwordBeforeEncrypted+"\n\nKeep this username and password for your records.");
 
 	        emailSenderService.sendEmail(mailMessage);
 	     
@@ -165,8 +165,8 @@ public class AuthController {
 		}
 	  
 	  	HttpHeaders headers = new HttpHeaders();
-	    headers.add("Location", "http://localhost:3000/login");    
-	    return new ResponseEntity("You can now login. Please close out this window. Check your email for login credentials.", HttpStatus.OK);	
+	    headers.add("Location", "https://kkc-webapp.herokuapp.com/login");    
+	    return new ResponseEntity("Thank you, this confirms your email! You may close this window login at <a href=\"https://kkc-webapp.herokuapp.com/login\" target=\"_blank\">https://kkc-webapp.herokuapp.com/login</a>", HttpStatus.OK);	
     }
 	 
      
