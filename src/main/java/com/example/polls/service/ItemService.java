@@ -14,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.example.polls.model.Image;
 import com.example.polls.model.Item;
+import com.example.polls.model.Student;
 import com.example.polls.repository.ImageRepo;
 import com.example.polls.repository.ItemRepository;
 
@@ -27,10 +28,27 @@ public class ItemService {
     
     private static final Logger logger = LoggerFactory.getLogger(ItemService.class);
 
-	public Page<Item> findAll(Pageable pageable, String searchText) {
-    	System.out.println("findAll items service"+searchText);
-		return itemRepository.findAll(pageable, searchText);
+    public Page<Item> findAllBySearchAndType(Pageable pageable, String searchText, String type, boolean active) {
+		return itemRepository.findAllBySearchAndType(pageable, searchText, type, active);
 	}
+    
+    public Page<Item> findAll(Pageable pageable, String searchText, boolean active) {
+		return itemRepository.findAll(pageable, searchText, active);
+	}
+    
+    public Page<Item> findAllByType(Pageable pageable, String type, boolean active) {
+		return itemRepository.findAllByType(pageable, type, active);
+	}
+    
+    public Page<Item> findAllByActive(Pageable pageable, boolean active) {
+		return itemRepository.findAllByActive(pageable, active);
+	}
+    
+	/*
+	 * public Page<Item> findAll(Pageable pageable, String searchText) {
+	 * System.out.println("findAll items service"+searchText); return
+	 * itemRepository.findAll(pageable, searchText); }
+	 */
     
 	public Page<Item> findAll(Pageable pageable) {
 		return itemRepository.findAll(pageable);
@@ -71,10 +89,11 @@ public class ItemService {
 		return jsonObject.toString();
 	}
 	
-	public Page<Item> findAllItemsByActive(Pageable pageable) {
-		System.out.println("findallbyActive");
-		return itemRepository.findAllItemsByActive(pageable);
-	}
+	/*
+	 * public Page<Item> findAllItemsByActive(Pageable pageable) {
+	 * System.out.println("findallbyActive"); return
+	 * itemRepository.findAllItemsByActive(pageable); }
+	 */
 
 	public Image saveOrUpdateImage(MultipartFile file, Long id) {
 		Image item = new Image();

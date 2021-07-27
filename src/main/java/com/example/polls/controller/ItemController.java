@@ -17,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.example.polls.model.Image;
 import com.example.polls.model.Item;
+import com.example.polls.model.Student;
 import com.example.polls.service.ItemService;
 
 @RestController
@@ -26,22 +27,45 @@ public class ItemController {
     @Autowired
 	private ItemService itemService;
     
-    @GetMapping("/search/{search}")
-	public ResponseEntity<Page<Item>> findAll(Pageable pageable, @PathVariable String search) {
-		System.out.println("findAll items controller search"+search);
-		return new ResponseEntity<>(itemService.findAll(pageable, search), HttpStatus.OK);
+    @GetMapping("/search/{searchText}/type/{type}/active/{active}")
+	public ResponseEntity<Page<Item>> findAll(Pageable pageable, @PathVariable String searchText, @PathVariable String type, @PathVariable boolean active) {
+		return new ResponseEntity<>(itemService.findAllBySearchAndType(pageable, searchText, type, active), HttpStatus.OK);
 	}
+    
+    @GetMapping("/search/{searchText}/active/{active}")
+	public ResponseEntity<Page<Item>> findAll(Pageable pageable, @PathVariable String searchText, @PathVariable boolean active) {
+		return new ResponseEntity<>(itemService.findAll(pageable, searchText, active), HttpStatus.OK);
+	}
+    
+    @GetMapping("/type/{type}/active/{active}")
+	public ResponseEntity<Page<Item>> findAllType(Pageable pageable, @PathVariable String type, @PathVariable boolean active) {
+		return new ResponseEntity<>(itemService.findAllByType(pageable, type, active), HttpStatus.OK);
+	}
+    
+    @GetMapping("/active/{active}")
+	public ResponseEntity<Page<Item>> findAllByActive(Pageable pageable, @PathVariable boolean active) {
+    	System.out.println("findAll controller this one ");
+		return new ResponseEntity<>(itemService.findAllByActive(pageable, active), HttpStatus.OK);
+	}
+    
+	/*
+	 * @GetMapping("/search/{search}") public ResponseEntity<Page<Item>>
+	 * findAll(Pageable pageable, @PathVariable String search) {
+	 * System.out.println("findAll items controller search"+search); return new
+	 * ResponseEntity<>(itemService.findAll(pageable, search), HttpStatus.OK); }
+	 */
 
     @GetMapping
 	public ResponseEntity<Page<Item>> findAll(Pageable pageable) {
-		System.out.println("findAll controller"+pageable.getPageNumber()+" "+pageable.getPageSize());
 		return new ResponseEntity<>(itemService.findAll(pageable), HttpStatus.OK);
 	}
 
-    @GetMapping("/active")
-	public ResponseEntity<Page<Item>> findAllByActive(Pageable pageable) {
-		return new ResponseEntity<>(itemService.findAllItemsByActive(pageable), HttpStatus.OK);
-	}
+	/*
+	 * @GetMapping("/active") public ResponseEntity<Page<Item>>
+	 * findAllByActive(Pageable pageable) { return new
+	 * ResponseEntity<>(itemService.findAllItemsByActive(pageable), HttpStatus.OK);
+	 * }
+	 */
     
     @GetMapping("{id}")
 	public ResponseEntity<Item> findById(@PathVariable Long id) {
