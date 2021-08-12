@@ -14,7 +14,7 @@ import org.springframework.lang.NonNull;
 import com.example.polls.util.JSONObjectConverter;
 
 @Entity
-@Table(name = "blog")
+@Table(name = "blogs")
 public class Blog {
 
 	
@@ -22,10 +22,28 @@ public class Blog {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 	
-	@NonNull
-    @Column(columnDefinition = "TEXT")
-    @Convert(converter= JSONObjectConverter.class)
-    private JSONObject jsonData;
+	@Column(columnDefinition = "TEXT")
+    private String jsonData;
+    
+    private boolean active;
+    
+    private String date;
+    
+    private String author;
+  
+
+	public Blog() {
+		super();
+	}
+
+	public Blog(Long id, String jsonData, boolean active, String date, String author) {
+		super();
+		this.id = id;
+		this.jsonData = jsonData;
+		this.active = active;
+		this.date = date;
+		this.author = author;
+	}
 
 	public Long getId() {
 		return id;
@@ -35,12 +53,42 @@ public class Blog {
 		this.id = id;
 	}
 
-	public JSONObject getJsonData() {
+	public String getJsonData() {
 		return jsonData;
 	}
 
-	public void setJsonData(JSONObject jsonData) {
+	public void setJsonData(String jsonData) {
 		this.jsonData = jsonData;
 	}
+
+	public String getDate() {
+		return date;
+	}
+
+	public void setDate(String date) {
+		this.date = date;
+	}
+	
+	public boolean isActive() {
+		return active;
+	}
+
+	public void setActive(boolean active) {
+		this.active = active;
+	}
+
+	public String getAuthor() {
+		return author;
+	}
+
+	public void setAuthor(String author) {
+		this.author = author;
+	}
+
+	@Override
+	public String toString() {
+		return "Blog [id=" + id + ", jsonData=" + jsonData + "]";
+	}
+	
 	
 }
