@@ -29,6 +29,7 @@ public class ImageController {
     
     @GetMapping("/image/{id}")
 	public ResponseEntity<Image> findById(@PathVariable Long id) {
+    	System.out.println("get image"+id);
 		return new ResponseEntity<>(imageService.findById(id), HttpStatus.OK);
 	}
     
@@ -38,7 +39,7 @@ public class ImageController {
 	}
 	
 	@DeleteMapping("/image/{id}")
-	public ResponseEntity<String> deleteItemImageById(@PathVariable Long id) {
+	public ResponseEntity<String> deleteById(@PathVariable Long id) {
 		return new ResponseEntity<>(imageService.deleteById(id), HttpStatus.OK);
 	}
 }

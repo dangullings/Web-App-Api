@@ -30,19 +30,22 @@ public class Blog {
     private String date;
     
     private String author;
+    
+    private Long imageId;
   
 
 	public Blog() {
 		super();
 	}
 
-	public Blog(Long id, String jsonData, boolean active, String date, String author) {
+	public Blog(Long id, String jsonData, boolean active, String date, String author, Long imageId) {
 		super();
 		this.id = id;
 		this.jsonData = jsonData;
 		this.active = active;
 		this.date = date;
 		this.author = author;
+		this.imageId = imageId;
 	}
 
 	public Long getId() {
@@ -89,6 +92,13 @@ public class Blog {
 	public String toString() {
 		return "Blog [id=" + id + ", jsonData=" + jsonData + "]";
 	}
-	
+
+	public Long getImageId() {
+		return imageId;
+	}
+
+	public void setImageId(Long imageId) {
+		this.imageId = imageId;
+	}
 	
 }

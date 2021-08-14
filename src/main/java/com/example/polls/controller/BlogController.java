@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,10 +26,10 @@ public class BlogController {
 	@Autowired
 	private BlogService blogService;
 	
-	@PostMapping("/save/id/{id}/active/{active}/date/{date}/author/{author}")
-	public ResponseEntity<Blog> save(@RequestBody String object, @PathVariable Long id, @PathVariable boolean active, @PathVariable String date, @PathVariable String author) {
+	@PostMapping("/save/id/{id}/active/{active}/date/{date}/author/{author}/imageId/{imageId}")
+	public ResponseEntity<Blog> save(@RequestBody String object, @PathVariable Long id, @PathVariable boolean active, @PathVariable String date, @PathVariable String author, @PathVariable Long imageId) {
 		System.out.println("blog controller save "+id+" "+object);
-		return new ResponseEntity<>(blogService.saveOrUpdate(id, object, active, date, author), HttpStatus.CREATED);
+		return new ResponseEntity<>(blogService.saveOrUpdate(id, object, active, date, author, imageId), HttpStatus.CREATED);
 	}
 	
 	@GetMapping("{id}")
@@ -40,6 +41,11 @@ public class BlogController {
 	public ResponseEntity<Page<Blog>> findAllByActive(Pageable pageable, @PathVariable boolean active) {
 		System.out.println("blog controller findallbyactive "+active);
 		return new ResponseEntity<>(blogService.findAllByActive(pageable, active), HttpStatus.OK);
+	}
+	
+	@DeleteMapping("{id}")
+	public ResponseEntity<String> deleteById(@PathVariable Long id) {
+		return new ResponseEntity<>(blogService.deleteById(id), HttpStatus.OK);
 	}
 
 }

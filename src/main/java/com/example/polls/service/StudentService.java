@@ -43,7 +43,7 @@ public class StudentService {
 		JSONObject jsonObject = new JSONObject();
 		try {
 			studentRepository.deleteById(id);
-			jsonObject.put("message", "Book deleted successfully");
+			jsonObject.put("message", "deleted successfully");
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}

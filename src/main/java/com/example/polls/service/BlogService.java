@@ -2,6 +2,8 @@ package com.example.polls.service;
 
 import java.time.LocalDateTime;
 
+import org.codehaus.jettison.json.JSONException;
+import org.codehaus.jettison.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -17,7 +19,7 @@ public class BlogService {
 	@Autowired
     private BlogRepo blogRepo;
 	
-	public Blog saveOrUpdate(Long id, String object, boolean active, String date, String author) {
+	public Blog saveOrUpdate(Long id, String object, boolean active, String date, String author, Long imageId) {
 		//Optional<Blog> blog = blogRepo.findById(object.getId());
 	    //try {
 		//	System.out.println(object.get().getJsonData().getString("KEY"));
@@ -34,7 +36,7 @@ public class BlogService {
 		
 		System.out.println("blog service save "+date);
 		
-		Blog blog = new Blog(id, object, active, date, author);
+		Blog blog = new Blog(id, object, active, date, author, imageId);
 		
 		//Blog blog = new Blog();
 		//blog.setJsonData(object);
@@ -59,4 +61,14 @@ public class BlogService {
 		return blogRepo.findAllByActive(pageable, active);
 	}
 	
+	public String deleteById(Long id) {
+		JSONObject jsonObject = new JSONObject();
+		try {
+			blogRepo.deleteById(id);
+			jsonObject.put("message", "deleted successfully");
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		return jsonObject.toString();
+	}
 }
