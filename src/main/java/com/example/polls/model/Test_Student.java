@@ -20,6 +20,7 @@ public class Test_Student {
 
     private String ranks, form, steps, power, kiap, questions, attitude, sparring, breaking;
     private boolean passed;
+    private boolean paid;
     
     public Test_Student() {
 
@@ -129,6 +130,14 @@ public class Test_Student {
 
 	public void setPassed(boolean passed) {
 		this.passed = passed;
+	}
+
+	public boolean isPaid() {
+		return paid;
+	}
+
+	public void setPaid(boolean paid) {
+		this.paid = paid;
 	}
 
 	@PostLoad
