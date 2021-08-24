@@ -38,8 +38,8 @@ public class Test_StudentService {
 		return student_testRepository.findById(id).get();
 	}
 
-	public Test_Student saveOrUpdate(Test_Student test) {
-		return student_testRepository.save(test);
+	public Test_Student saveOrUpdate(Test_Student test_student) {
+		return student_testRepository.save(test_student);
 	}
 
 	public void deleteAllByTestId(Long testId) {
@@ -58,7 +58,7 @@ public class Test_StudentService {
 		JSONObject jsonObject = new JSONObject();
 		try {
 			student_testRepository.deleteById(id);
-			jsonObject.put("message", "Book deleted successfully");
+			jsonObject.put("message", " deleted successfully");
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
@@ -66,12 +66,10 @@ public class Test_StudentService {
 	}
 
 	public Page<Test_Student> findAllByStudentId(Pageable pageable, Long studentId) {
-		System.out.println("findbystudentid teststudent service"+pageable.getPageNumber()+" "+pageable.getPageSize()+" student"+studentId);
 		return student_testRepository.findAllByStudentId(pageable, studentId);
 	}
 	
 	public Test_Student findByTestIdAndStudentId(Long testId, Long studentId) {
-		System.out.println("findbytestidandstudentid service"+testId+" "+studentId);
 		return student_testRepository.findByTestIdAndStudentId(testId, studentId);
 	}
 

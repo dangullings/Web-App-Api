@@ -40,15 +40,11 @@ public class TestStudentController {
 	
     @GetMapping("/{testId}/students")
     public List<Student> findAllStudentsById(@PathVariable(value = "testId") long testId) {
-		System.out.println("findallstudentbytestid controller "+testId);
-		
         return test_studentService.findAllStudentsById(testId);
     }
     
     @GetMapping("/{studentId}/tests")
     public List<Test> findAllTestsByStudentId(@PathVariable(value = "studentId") long studentId) {
-		System.out.println("findallstudentbytestid controller "+studentId);
-		
         return test_studentService.findAllTestsByStudentId(studentId);
     }
     
