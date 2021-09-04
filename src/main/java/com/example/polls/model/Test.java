@@ -1,5 +1,7 @@
 package com.example.polls.model;
 
+import java.math.BigDecimal;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -19,6 +21,7 @@ public class Test {
     private String date;
     private String startTime, endTime;
     private int month, year;
+    private BigDecimal price;
 
     public Test(){
 
@@ -102,6 +105,14 @@ public class Test {
 
 	public void setYear(int year) {
 		this.year = year;
+	}
+
+	public BigDecimal getPrice() {
+		return price;
+	}
+
+	public void setPrice(BigDecimal price) {
+		this.price = price;
 	}
 	
 }

@@ -21,7 +21,7 @@ public interface StudentRepository extends PagingAndSortingRepository<Student, L
 	Page<Student> findAll(Pageable pageable, String searchText, boolean active);
 	
 	@Query(
-		value = "SELECT * FROM students WHERE students.active =:active ORDER BY students.joined DESC",
+		value = "SELECT * FROM students WHERE students.active =:active ORDER BY FIELD(ranks, 'White Belt', 'Gold Stripe', 'Gold Belt', 'Green Stripe', 'Green Belt', 'Purple Stripe', 'Purple Belt', 'Brown Stripe', 'Brown Belt', 'Red Stripe', 'Red Belt', '1st Degree', '1st of 2nd', '2nd Degree', '1st of 3rd', '2nd of 3rd', '3rd Degree', '1st of 4th', '2nd of 4th', '3rd of 4th', '4th Degree', '1st of 5th', '2nd of 5th', '3rd of 5th', '4th of 5th', '5th Degree')",
 		nativeQuery = true)
 	Page<Student> findAllByActive(Pageable pageable, boolean active);
 
