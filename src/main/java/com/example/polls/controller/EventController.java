@@ -30,13 +30,11 @@ public class EventController {
 
 	@GetMapping("/search/month/{month}/year/{year}")
     public ResponseEntity<Page<CalendarEvent>> findAllByMonthYear(Pageable pageable, @PathVariable String month, @PathVariable String year) {
-		System.out.println("eventcontroller month "+month+" year "+year);
 		return new ResponseEntity<>(eventService.findAllByMonthYear(pageable, month, year), HttpStatus.OK);
 	}
 	
 	@GetMapping
 	public ResponseEntity<Page<CalendarEvent>> findAll(Pageable pageable) {
-		System.out.println("get all events ");
 		return new ResponseEntity<>(eventService.findAll(pageable), HttpStatus.OK);
 	}
 

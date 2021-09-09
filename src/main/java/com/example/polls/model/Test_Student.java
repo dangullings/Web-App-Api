@@ -1,5 +1,7 @@
 package com.example.polls.model;
 
+import java.math.BigDecimal;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
@@ -20,6 +22,7 @@ public class Test_Student {
 
     private String ranks, form, steps, power, kiap, questions, attitude, sparring, breaking;
     private boolean passed;
+    private BigDecimal paidAmount;
     private boolean paid;
     
     public Test_Student() {
@@ -130,6 +133,14 @@ public class Test_Student {
 
 	public void setPassed(boolean passed) {
 		this.passed = passed;
+	}
+
+	public BigDecimal getPaidAmount() {
+		return paidAmount;
+	}
+
+	public void setPaidAmount(BigDecimal paidAmount) {
+		this.paidAmount = paidAmount;
 	}
 
 	public boolean isPaid() {

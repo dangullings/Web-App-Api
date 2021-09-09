@@ -17,6 +17,49 @@ public class Budget {
     private Long id;
 	
 	private String type;
+	private Long assignRef;
     private BigDecimal amount;
-    private boolean isExpense;
+    private boolean expense;
+    private String date;
+    
+	public Budget() {
+		super();
+	}
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
+	}
+	public Long getAssignRef() {
+		return assignRef;
+	}
+	public void setAssignRef(Long assignRef) {
+		this.assignRef = assignRef;
+	}
+	public BigDecimal getAmount() {
+		return amount;
+	}
+	public void setAmount(BigDecimal amount) {
+		this.amount = amount;
+	}
+	public String getDate() {
+		return date;
+	}
+	public void setDate(String date) {
+		this.date = date;
+	}
+	public boolean isExpense() {
+		return expense;
+	}
+	public void setExpense(boolean expense) {
+		this.expense = expense;
+	}
+    
 }

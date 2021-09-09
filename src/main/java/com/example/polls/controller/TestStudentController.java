@@ -40,6 +40,7 @@ public class TestStudentController {
 	
     @GetMapping("/{testId}/students")
     public List<Student> findAllStudentsById(@PathVariable(value = "testId") long testId) {
+    	System.out.println("testStudent Controller find students by test id "+testId);
         return test_studentService.findAllStudentsById(testId);
     }
     
@@ -48,6 +49,11 @@ public class TestStudentController {
         return test_studentService.findAllTestsByStudentId(studentId);
     }
     
+    @GetMapping("/tests/{testId}")
+	public List<Test_Student> findAllTestStudentsByTestId(@PathVariable(value = "testId") long testId) {
+		return test_studentService.findAllTestStudentsByTestId(testId);
+	}
+	
     @GetMapping("/{testId}/{studentId}")
 	public ResponseEntity<Test_Student> findByTestIdAndStudentId(@PathVariable Long testId, @PathVariable Long studentId) {
 		return new ResponseEntity<>(test_studentService.findByTestIdAndStudentId(testId, studentId), HttpStatus.OK);

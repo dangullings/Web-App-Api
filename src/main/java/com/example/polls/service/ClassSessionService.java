@@ -30,9 +30,9 @@ public class ClassSessionService {
 
     private static final Logger logger = LoggerFactory.getLogger(TestService.class);
 	
-	//public Page<ClassSession> findAll(Pageable pageable) {
-	//	return classSessionRepo.findAll(pageable);
-	//}
+    public Page<ClassSession> findAllByMonthYear(Pageable pageable, String month, String year) {
+		return classSessionRepo.findAllByMonthYear(pageable, month, year);
+	}
 
 	public Page<ClassSession> findAllByEndDate(Pageable pageable) {
 		return classSessionRepo.findAllByEndDate(pageable);

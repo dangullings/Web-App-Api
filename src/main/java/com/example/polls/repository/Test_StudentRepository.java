@@ -46,6 +46,11 @@ public interface Test_StudentRepository extends PagingAndSortingRepository<Test_
 		void deleteAllByTestIdAndStudentId(Long testId, Long studentId);
 		
 	@Query(
+			value = "SELECT * FROM test_student WHERE test_student.test_id =:testId",
+			nativeQuery = true)
+		List<Test_Student> findAllTestStudentsByTestId(Long testId);
+		
+	@Query(
 			value = "SELECT * FROM test_student WHERE test_student.student_id =:studentId",
 			nativeQuery = true)
 		Page<Test_Student> findAllByStudentId(Pageable pageable, Long studentId);

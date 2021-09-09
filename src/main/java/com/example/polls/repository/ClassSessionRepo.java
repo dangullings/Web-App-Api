@@ -19,6 +19,11 @@ public interface ClassSessionRepo extends JpaRepository<ClassSession, Long> {
     Optional<ClassSession> findById(Long classSessionId);
     
     @Query(
+    		value = "SELECT * FROM class_sessions WHERE class_sessions.month =:month AND class_sessions.year =:year",
+    		nativeQuery = true)
+    	Page<ClassSession> findAllByMonthYear(Pageable pageable, String month, String year);
+    
+    @Query(
     		value = "SELECT * FROM class_sessions ORDER BY class_sessions.start_date DESC LIMIT 10",
     		nativeQuery = true)
     	List<ClassSession> findAllByDateDesc();

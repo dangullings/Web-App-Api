@@ -33,10 +33,10 @@ public class ClassSessionController {
     @Autowired
 	private ClassDateService classDateService;
 
-    //@GetMapping
-	//public ResponseEntity<Page<ClassSession>> findAll(Pageable pageable) {
-	//	return new ResponseEntity<>(classSessionService.findAll(pageable), HttpStatus.OK);
-	//}
+    @GetMapping("/search/month/{month}/year/{year}")
+    public ResponseEntity<Page<ClassSession>> findAllByMonthYear(Pageable pageable, @PathVariable String month, @PathVariable String year) {
+		return new ResponseEntity<>(classSessionService.findAllByMonthYear(pageable, month, year), HttpStatus.OK);
+	}
 
     @GetMapping
 	public ResponseEntity<Page<ClassSession>> findAllByEndDate(Pageable pageable) {
@@ -45,7 +45,6 @@ public class ClassSessionController {
     
 	@GetMapping("{id}")
 	public ResponseEntity<ClassSession> findById(@PathVariable Long id) {
-		System.out.println("findbyid "+id);
 		return new ResponseEntity<>(classSessionService.findById(id), HttpStatus.OK);
 	}
 

@@ -45,7 +45,6 @@ public class OrderController {
 
     @GetMapping("/search/{searchText}/fulfilled/{fulfilled}")
 	public ResponseEntity<Page<Order>> findAll(Pageable pageable, @PathVariable String searchText, @PathVariable boolean fulfilled) {
-		System.out.println("findAll controller search"+searchText+" boolean active "+fulfilled);
 		return new ResponseEntity<>(orderService.findAll(pageable, searchText, fulfilled), HttpStatus.OK);
 	}
     

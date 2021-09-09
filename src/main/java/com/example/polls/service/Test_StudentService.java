@@ -69,6 +69,10 @@ public class Test_StudentService {
 		return student_testRepository.findAllByStudentId(pageable, studentId);
 	}
 	
+	public List<Test_Student> findAllTestStudentsByTestId(Long testId) {
+		return student_testRepository.findAllTestStudentsByTestId(testId);
+	}
+	
 	public Test_Student findByTestIdAndStudentId(Long testId, Long studentId) {
 		return student_testRepository.findByTestIdAndStudentId(testId, studentId);
 	}

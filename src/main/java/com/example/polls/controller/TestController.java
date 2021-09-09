@@ -30,7 +30,6 @@ public class TestController {
 
     @GetMapping("/search/month/{month}/year/{year}")
     public ResponseEntity<Page<Test>> findAllByMonthYear(Pageable pageable, @PathVariable String month, @PathVariable String year) {
-    	System.out.println("test controller month "+month+" year "+year);
 		return new ResponseEntity<>(testService.findAllByMonthYear(pageable, month, year), HttpStatus.OK);
 	}
     
