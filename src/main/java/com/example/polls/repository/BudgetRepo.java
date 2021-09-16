@@ -15,7 +15,7 @@ import com.example.polls.model.CalendarEvent;
 public interface BudgetRepo extends JpaRepository<Budget, Long> {
 
 	@Query(
-    		value = "SELECT * FROM budget WHERE budget.expense =:expense AND budget.date >=:beginDate AND budget.date <=:endDate ORDER BY budget.date Asc",
+    		value = "SELECT * FROM budget WHERE budget.expense =:expense AND budget.date >=:beginDate AND budget.date <=:endDate ORDER BY budget.date Desc",
     		nativeQuery = true)
     	Page<Budget> findAll(Pageable pageable, boolean expense, String beginDate, String endDate);
 	

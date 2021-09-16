@@ -21,6 +21,7 @@ public class Budget {
     private BigDecimal amount;
     private boolean expense;
     private String date;
+    private String note;
     
 	public Budget() {
 		super();
@@ -60,6 +61,12 @@ public class Budget {
 	}
 	public void setExpense(boolean expense) {
 		this.expense = expense;
+	}
+	public String getNote() {
+		return note;
+	}
+	public void setNote(String note) {
+		this.note = note;
 	}
     
 }
