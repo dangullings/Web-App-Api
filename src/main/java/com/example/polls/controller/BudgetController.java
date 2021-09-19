@@ -35,7 +35,7 @@ public class BudgetController {
 	}
 	
 	
-	@DeleteMapping("{id}") 
+	@DeleteMapping("/type/{type}/id/{id}") 
 	public void deleteAllByTypeAndAssignRef(@PathVariable String type, @PathVariable Long id) { 
 		budgetService.deleteAllByTypeAndAssignRef(type, id); 
 	}

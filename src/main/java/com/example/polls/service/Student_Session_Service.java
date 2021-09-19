@@ -39,4 +39,8 @@ public class Student_Session_Service {
 	public void deleteAllBySessionId(Long sessionId) {
 		student_session_repository.deleteAllBySessionId(sessionId);
 	}
+	
+	public void deleteAllBySessionIdAndStudentId(Long sessionId, Long studentId) {
+		student_session_repository.deleteAllBySessionIdAndStudentId(sessionId, studentId);
+	}
 }

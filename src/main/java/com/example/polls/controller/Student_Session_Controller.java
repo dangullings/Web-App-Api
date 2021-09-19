@@ -75,4 +75,9 @@ public class Student_Session_Controller {
 		student_session_service.deleteAllBySessionId(sessionId);
 	}
 	
+	@DeleteMapping("/session/{sessionId}/student/{studentId}")
+	public void deleteAllByStudentId(@PathVariable Long sessionId, @PathVariable Long studentId) {
+		student_session_service.deleteAllBySessionIdAndStudentId(sessionId, studentId);
+	}
+	
 }
